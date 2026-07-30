@@ -372,7 +372,7 @@
           stock.textContent = stock.getAttribute('data-text-out');
         } else if (variant.inventory_management && variant.inventory_quantity > 0 && variant.inventory_quantity <= 10) {
           stock.classList.add('stock-indicator--low');
-          stock.textContent = (stock.getAttribute('data-text-low') || '').replace('{{ count }}', variant.inventory_quantity);
+          stock.textContent = (stock.getAttribute('data-text-low') || '').replace('[count]', variant.inventory_quantity);
         } else {
           stock.textContent = stock.getAttribute('data-text-in');
         }

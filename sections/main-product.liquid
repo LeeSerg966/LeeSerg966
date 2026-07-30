@@ -115,7 +115,7 @@
                   class="stock-indicator{% unless current_variant.available %} stock-indicator--out{% endunless %}"
                   data-stock
                   data-text-in="{{ 'products.product.in_stock' | t }}"
-                  data-text-low="{{ 'products.product.low_stock' | t: count: '{{ count }}' }}"
+                  data-text-low="{{ 'products.product.low_stock' | t: count: '[count]' }}"
                   data-text-out="{{ 'products.product.inventory_out' | t }}">
                   {%- if current_variant.available -%}
                     {{ 'products.product.in_stock' | t }}
