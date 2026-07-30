@@ -16,24 +16,51 @@
       "blocks": {
         "v1": {
           "type": "item",
-          "settings": { "icon": "truck", "heading": "Free EU shipping", "text": "On every order over €50." }
+          "settings": {
+            "icon": "truck",
+            "heading": "Free US shipping",
+            "text": "On every order, 5–8 business days."
+          }
         },
         "v2": {
           "type": "item",
-          "settings": { "icon": "return", "heading": "30-day returns", "text": "Send it back, no questions asked." }
+          "settings": {
+            "icon": "return",
+            "heading": "30-day returns",
+            "text": "Send it back, no questions asked."
+          }
         },
         "v3": {
           "type": "item",
-          "settings": { "icon": "shield", "heading": "2-year guarantee", "text": "On every motorised tool." }
+          "settings": {
+            "icon": "shield",
+            "heading": "Made for nervous pets",
+            "text": "Quiet motors, guarded blades."
+          }
         },
         "v4": {
           "type": "item",
-          "settings": { "icon": "chat", "heading": "Real humans", "text": "Replies within 24 hours." }
+          "settings": {
+            "icon": "chat",
+            "heading": "Real humans",
+            "text": "Replies within 24 hours."
+          }
         }
       },
-      "block_order": ["v1", "v2", "v3", "v4"],
-      "settings": { "surface": true, "tight": true }
+      "block_order": [
+        "v1",
+        "v2",
+        "v3",
+        "v4"
+      ],
+      "settings": {
+        "surface": true,
+        "tight": true
+      }
     }
   },
-  "order": ["main", "value-props"]
+  "order": [
+    "main",
+    "value-props"
+  ]
 }

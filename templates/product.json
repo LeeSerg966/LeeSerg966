@@ -3,30 +3,64 @@
     "main": {
       "type": "main-product",
       "blocks": {
-        "vendor": { "type": "vendor", "settings": {} },
-        "title": { "type": "title", "settings": {} },
-        "rating": { "type": "rating", "settings": { "stars": 5, "text": "" } },
-        "price": { "type": "price", "settings": { "show_taxes_note": true } },
-        "stock": { "type": "stock", "settings": {} },
-        "variant_picker": { "type": "variant_picker", "settings": {} },
-        "buy": { "type": "quantity_and_buy", "settings": { "show_dynamic_checkout": true } },
+        "vendor": {
+          "type": "vendor",
+          "settings": {}
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "rating": {
+          "type": "rating",
+          "settings": {
+            "stars": 5,
+            "text": ""
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "show_taxes_note": true
+          }
+        },
+        "stock": {
+          "type": "stock",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {}
+        },
+        "buy": {
+          "type": "quantity_and_buy",
+          "settings": {
+            "show_dynamic_checkout": true
+          }
+        },
         "trust": {
           "type": "trust",
           "settings": {
-            "item_1": "Free EU shipping over €50 — ships within 24h",
+            "item_1": "Free US shipping — delivered in 5–8 business days",
             "item_2": "30-day returns, no questions asked",
-            "item_3": "2-year guarantee on all motorised tools"
+            "item_3": "Express 2–4 business days available at checkout"
           }
         },
-        "description": { "type": "description", "settings": {} },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
         "shipping": {
           "type": "collapsible",
           "settings": {
             "heading": "Shipping & returns",
-            "content": "<p>Dispatched within 24 hours. Germany and Austria: 2–4 working days. Rest of the EU: 4–7 working days. Free over €50, otherwise €4.90.</p><p>30-day returns — email us for a prepaid label.</p>"
+            "content": "<p>Standard shipping to the US is free on every order, delivered in 5–8 business days. Express is 2–4 business days for $9.99 at checkout.</p><p>30-day returns — email us and we'll send a prepaid label.</p>"
           }
         },
-        "share": { "type": "share", "settings": {} }
+        "share": {
+          "type": "share",
+          "settings": {}
+        }
       },
       "block_order": [
         "vendor",
@@ -59,24 +93,52 @@
       "blocks": {
         "v1": {
           "type": "item",
-          "settings": { "icon": "truck", "heading": "Free EU shipping", "text": "On every order over €50." }
+          "settings": {
+            "icon": "truck",
+            "heading": "Free US shipping",
+            "text": "On every order, 5–8 business days."
+          }
         },
         "v2": {
           "type": "item",
-          "settings": { "icon": "return", "heading": "30-day returns", "text": "Send it back, no questions asked." }
+          "settings": {
+            "icon": "return",
+            "heading": "30-day returns",
+            "text": "Send it back, no questions asked."
+          }
         },
         "v3": {
           "type": "item",
-          "settings": { "icon": "shield", "heading": "2-year guarantee", "text": "On every motorised tool." }
+          "settings": {
+            "icon": "shield",
+            "heading": "Made for nervous pets",
+            "text": "Quiet motors, guarded blades."
+          }
         },
         "v4": {
           "type": "item",
-          "settings": { "icon": "chat", "heading": "Real humans", "text": "Replies within 24 hours." }
+          "settings": {
+            "icon": "chat",
+            "heading": "Real humans",
+            "text": "Replies within 24 hours."
+          }
         }
       },
-      "block_order": ["v1", "v2", "v3", "v4"],
-      "settings": { "surface": false, "tight": true }
+      "block_order": [
+        "v1",
+        "v2",
+        "v3",
+        "v4"
+      ],
+      "settings": {
+        "surface": false,
+        "tight": true
+      }
     }
   },
-  "order": ["main", "related", "value-props"]
+  "order": [
+    "main",
+    "related",
+    "value-props"
+  ]
 }

@@ -10,9 +10,9 @@
         "subtitle": "Quiet nail grinders, muddy-paw cleaners and walk-ready gear — made for pets who'd rather be doing anything else.",
         "button_label": "Shop bestsellers",
         "button_label_2": "See how it works",
-        "point_1": "Free EU shipping over €50",
+        "point_1": "Free US shipping",
         "point_2": "30-day returns",
-        "point_3": "Ships within 24 hours"
+        "point_3": "Express 2–4 days available"
       }
     },
     "marquee": {
@@ -21,7 +21,7 @@
         "m1": {
           "type": "item",
           "settings": {
-            "text": "Free EU shipping over €50",
+            "text": "Free US shipping on every order",
             "icon": "truck"
           }
         },
@@ -164,8 +164,8 @@
           "type": "item",
           "settings": {
             "icon": "truck",
-            "heading": "Free EU shipping",
-            "text": "On every order over €50, tracked door to door."
+            "heading": "Free US shipping",
+            "text": "On every order, delivered in 5–8 business days."
           }
         },
         "v2": {
@@ -173,15 +173,15 @@
           "settings": {
             "icon": "return",
             "heading": "30-day returns",
-            "text": "Not the right fit? Send it back, no questions asked."
+            "text": "Not the right fit? Send it back within 30 days."
           }
         },
         "v3": {
           "type": "item",
           "settings": {
             "icon": "shield",
-            "heading": "2-year guarantee",
-            "text": "Every motorised tool is covered for two full years."
+            "heading": "Made for nervous pets",
+            "text": "Quiet motors and guarded blades, tested on the wriggly ones."
           }
         },
         "v4": {
@@ -296,7 +296,7 @@
           "type": "faq",
           "settings": {
             "question": "How long does delivery take?",
-            "answer": "<p>Orders leave our warehouse within 24 hours. Germany and Austria: 2–4 working days. Rest of the EU: 4–7 working days. You'll get a tracking link the moment it ships.</p>"
+            "answer": "<p>Standard shipping to the US is free on every order and arrives in 5–8 business days. Need it sooner? Express is 2–4 business days at checkout. You'll get a tracking link the moment it ships.</p>"
           }
         },
         "f2": {
@@ -310,7 +310,7 @@
           "type": "faq",
           "settings": {
             "question": "What's your returns policy?",
-            "answer": "<p>30 days from delivery, used or unused. Email us and we'll send a prepaid label — refunds land within five working days of the parcel reaching us.</p>"
+            "answer": "<p>30 days from delivery, used or unused. Email us and we'll send a prepaid label — refunds land within five business days of the parcel reaching us.</p>"
           }
         },
         "f4": {

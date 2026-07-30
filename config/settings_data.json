@@ -22,39 +22,54 @@
     "card_show_quick_add": true,
     "cart_drawer_enabled": true,
     "cart_show_note": true,
-    "cart_free_shipping_threshold": "50",
+    "cart_free_shipping_threshold": "",
     "sections": {
       "announcement-bar": {
         "type": "announcement-bar",
         "blocks": {
           "a1": {
             "type": "announcement",
-            "settings": { "text": "Free EU shipping on orders over €50 — ships within 24 hours" }
+            "settings": {
+              "text": "Free US shipping on every order — delivered in 5–8 business days"
+            }
           },
           "a2": {
             "type": "announcement",
-            "settings": { "text": "30-day returns on everything, no questions asked" }
+            "settings": {
+              "text": "30-day returns, no questions asked"
+            }
           }
         },
-        "block_order": ["a1", "a2"],
-        "settings": { "rotate_speed": 5 }
+        "block_order": [
+          "a1",
+          "a2"
+        ],
+        "settings": {
+          "rotate_speed": 5
+        }
       },
       "header": {
         "type": "header",
-        "settings": { "logo_width": 140, "menu": "main-menu" }
+        "settings": {
+          "logo_width": 140,
+          "menu": "main-menu"
+        }
       },
       "footer": {
         "type": "footer",
         "blocks": {
           "shop": {
             "type": "menu",
-            "settings": { "heading": "Shop", "menu": "main-menu" }
+            "settings": {
+              "heading": "Shop",
+              "menu": "main-menu"
+            }
           },
           "help": {
             "type": "text",
             "settings": {
               "heading": "Help",
-              "content": "<p>Questions? Email hello@kesvaro.com — we reply within 24 hours, Mon–Fri 9:00–18:00 CET.</p>"
+              "content": "<p>Questions? Email hello@kesvaro.com — we reply within 24 hours, Mon–Fri 9am–6pm ET.</p>"
             }
           },
           "news": {
@@ -65,7 +80,11 @@
             }
           }
         },
-        "block_order": ["shop", "help", "news"],
+        "block_order": [
+          "shop",
+          "help",
+          "news"
+        ],
         "settings": {
           "text": "Practical, well-made gear for dogs and cats — designed for calm grooming days, muddy walks and everything in between.",
           "show_payment_icons": true,

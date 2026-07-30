@@ -8,7 +8,7 @@
       "type": "contact-form",
       "blocks": {
         "d1": { "type": "item", "settings": { "icon": "chat", "heading": "Email", "text": "hello@kesvaro.com" } },
-        "d2": { "type": "item", "settings": { "icon": "clock", "heading": "Support hours", "text": "Mon–Fri, 9:00–18:00 CET" } },
+        "d2": { "type": "item", "settings": { "icon": "clock", "heading": "Support hours", "text": "Mon–Fri, 9am–6pm ET" } },
         "d3": { "type": "item", "settings": { "icon": "truck", "heading": "Order questions", "text": "Have your order number handy for the fastest reply." } }
       },
       "block_order": ["d1", "d2", "d3"],
