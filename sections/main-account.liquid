@@ -1,0 +1,67 @@
+<div class="section">
+  <div class="page-width">
+    <div class="customer customer--wide">
+      <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1.6rem;margin-bottom:3.2rem">
+        <h1 style="margin:0">{{ 'customer.account.title' | t }}</h1>
+        <div style="display:flex;gap:1rem">
+          <a href="{{ routes.account_addresses_url }}" class="btn btn--secondary btn--small">
+            {{ 'customer.account.view_addresses' | t }}
+          </a>
+          <a href="{{ routes.account_logout_url }}" class="btn btn--secondary btn--small">Log out</a>
+        </div>
+      </div>
+
+      <h2 class="h3">{{ 'customer.account.orders' | t }}</h2>
+
+      {%- paginate customer.orders by 20 -%}
+        {%- if customer.orders.size > 0 -%}
+          <table>
+            <thead>
+              <tr>
+                <th>{{ 'customer.account.order_number' | t }}</th>
+                <th>{{ 'customer.account.date' | t }}</th>
+                <th>{{ 'customer.account.payment_status' | t }}</th>
+                <th>{{ 'customer.account.fulfillment_status' | t }}</th>
+                <th>{{ 'customer.account.total' | t }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%- for order in customer.orders -%}
+                <tr>
+                  <td><a href="{{ order.customer_url }}">{{ order.name }}</a></td>
+                  <td>{{ order.created_at | date: format: 'date' }}</td>
+                  <td>{{ order.financial_status_label }}</td>
+                  <td>{{ order.fulfillment_status_label }}</td>
+                  <td>{{ order.total_price | money }}</td>
+                </tr>
+              {%- endfor -%}
+            </tbody>
+          </table>
+
+          {% render 'pagination', paginate: paginate %}
+        {%- else -%}
+          <p class="text-muted">{{ 'customer.account.no_orders' | t }}</p>
+          <a href="{{ routes.all_products_collection_url }}" class="btn">{{ 'general.continue_shopping' | t }}</a>
+        {%- endif -%}
+      {%- endpaginate -%}
+
+      <hr class="divider">
+
+      <h2 class="h3">{{ 'customer.account.details' | t }}</h2>
+      <div class="card-panel" style="max-width:44rem">
+        {{ customer.default_address | format_address }}
+        <a href="{{ routes.account_addresses_url }}" class="link-arrow" style="margin-top:1.2rem">
+          {{ 'customer.account.view_addresses' | t }}
+          {% render 'icon', icon: 'arrow-right' %}
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Account",
+  "settings": []
+}
+{% endschema %}

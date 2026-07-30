@@ -1,0 +1,126 @@
+<!doctype html>
+<html class="no-js" lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="{{ settings.color_background }}">
+    <link rel="canonical" href="{{ canonical_url }}">
+    <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+
+    {%- if settings.favicon != blank -%}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+    {%- endif -%}
+
+    <title>
+      {{ page_title }}
+      {%- if current_tags %} &ndash; {{ 'general.meta.tags' | t: tags: current_tags | join: ', ' }}{% endif -%}
+      {%- if current_page != 1 %} &ndash; {{ 'general.pagination.page' | t: number: current_page }}{% endif -%}
+      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+    </title>
+
+    {%- if page_description -%}
+      <meta name="description" content="{{ page_description | escape }}">
+    {%- endif -%}
+
+    {% render 'meta-tags' %}
+
+    {{ settings.font_body | font_face: font_display: 'swap' }}
+    {{ settings.font_heading | font_face: font_display: 'swap' }}
+
+    {%- liquid
+      assign body_font_bold = settings.font_body | font_modify: 'weight', 'bold'
+      assign body_font_italic = settings.font_body | font_modify: 'style', 'italic'
+    -%}
+    {{ body_font_bold | font_face: font_display: 'swap' }}
+    {{ body_font_italic | font_face: font_display: 'swap' }}
+
+    {% style %}
+      :root {
+        --color-background: {{ settings.color_background }};
+        --color-surface: {{ settings.color_surface }};
+        --color-text: {{ settings.color_text }};
+        --color-text-muted: {{ settings.color_text_muted }};
+        --color-accent: {{ settings.color_accent }};
+        --color-accent-text: {{ settings.color_accent_text }};
+        --color-sale: {{ settings.color_sale }};
+        --color-border: {{ settings.color_border }};
+        --color-accent-soft: {{ settings.color_accent | color_mix: settings.color_background, 12 }};
+        --color-accent-dark: {{ settings.color_accent | color_darken: 8 }};
+        --color-overlay: {{ settings.color_text | color_modify: 'alpha', 0.55 }};
+
+        --font-body-family: {{ settings.font_body.family }}, {{ settings.font_body.fallback_families }};
+        --font-body-style: {{ settings.font_body.style }};
+        --font-body-weight: {{ settings.font_body.weight }};
+        --font-heading-family: {{ settings.font_heading.family }}, {{ settings.font_heading.fallback_families }};
+        --font-heading-style: {{ settings.font_heading.style }};
+        --font-heading-weight: {{ settings.font_heading.weight }};
+        --font-body-scale: {{ settings.font_body_scale | divided_by: 100.0 }};
+        --font-heading-scale: {{ settings.font_heading_scale | divided_by: 100.0 }};
+        --heading-transform: {% if settings.heading_uppercase %}uppercase{% else %}none{% endif %};
+
+        --page-width: {{ settings.page_width }}px;
+        --radius: {{ settings.corner_radius }}px;
+        --radius-sm: {{ settings.corner_radius | divided_by: 2 }}px;
+        {%- case settings.button_style -%}
+          {%- when 'pill' -%}--button-radius: 999px;
+          {%- when 'square' -%}--button-radius: 0px;
+          {%- else -%}--button-radius: {{ settings.corner_radius }}px;
+        {%- endcase -%}
+      }
+    {% endstyle %}
+
+    {{ 'theme.css' | asset_url | stylesheet_tag }}
+
+    <script>
+      document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+      window.themeStrings = {
+        addToCart: {{ 'products.product.add_to_cart' | t | json }},
+        soldOut: {{ 'products.product.sold_out' | t | json }},
+        unavailable: {{ 'products.product.unavailable' | t | json }},
+        adding: {{ 'products.product.adding' | t | json }},
+        added: {{ 'products.product.added' | t | json }},
+        cartError: {{ 'cart.general.title' | t | json }}
+      };
+      window.themeSettings = {
+        cartDrawer: {{ settings.cart_drawer_enabled | json }},
+        moneyFormat: {{ shop.money_format | json }},
+        routes: {
+          cart: {{ routes.cart_url | json }},
+          cartAdd: {{ routes.cart_add_url | json }},
+          cartChange: {{ routes.cart_change_url | json }},
+          cartUpdate: {{ routes.cart_update_url | json }},
+          predictiveSearch: {{ routes.predictive_search_url | json }}
+        }
+      };
+    </script>
+    <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
+
+    {{ content_for_header }}
+  </head>
+
+  <body class="template-{{ request.page_type | handle }}">
+    <a class="skip-to-content-link visually-hidden" href="#MainContent">
+      {{ 'general.accessibility.skip_to_content' | t }}
+    </a>
+
+    {% section 'announcement-bar' %}
+    {% section 'header' %}
+
+    <main id="MainContent" class="main-content" role="main" tabindex="-1">
+      {{ content_for_layout }}
+    </main>
+
+    {% section 'footer' %}
+
+    {%- if settings.cart_drawer_enabled -%}
+      {% section 'cart-drawer' %}
+    {%- endif -%}
+
+    <div class="toast" id="ThemeToast" role="status" aria-live="polite" hidden></div>
+
+    <ul hidden>
+      <li id="a11y-refresh-page-message">{{ 'general.accessibility.skip_to_content' | t }}</li>
+    </ul>
+  </body>
+</html>

@@ -1,0 +1,135 @@
+<div class="section">
+  <div class="page-width">
+    <h1>{{ 'cart.general.title' | t }}</h1>
+
+    {%- if cart.item_count == 0 -%}
+      <div class="cart-empty">
+        {% render 'icon', icon: 'cart' %}
+        <h2>{{ 'cart.general.empty' | t }}</h2>
+        <p class="text-muted">{{ 'cart.general.empty_message' | t }}</p>
+        <a href="{{ routes.all_products_collection_url }}" class="btn">{{ 'general.continue_shopping' | t }}</a>
+      </div>
+    {%- else -%}
+      <form action="{{ routes.cart_url }}" method="post" novalidate>
+        {% render 'free-shipping-bar' %}
+
+        <table class="cart-table">
+          <thead>
+            <tr>
+              <th colspan="2">{{ 'cart.general.product' | t }}</th>
+              <th>{{ 'cart.general.quantity' | t }}</th>
+              <th>{{ 'cart.general.total' | t }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%- for item in cart.items -%}
+              <tr>
+                <td style="width:11rem">
+                  <a href="{{ item.url }}" tabindex="-1" aria-hidden="true">
+                    {%- if item.image -%}
+                      <img
+                        src="{{ item.image | image_url: width: 220 }}"
+                        alt="{{ item.image.alt | escape }}"
+                        width="100"
+                        height="100"
+                        loading="lazy"
+                        class="cart-item__image"
+                        style="width:10rem;height:10rem">
+                    {%- endif -%}
+                  </a>
+                </td>
+
+                <td>
+                  <a href="{{ item.url }}" class="cart-item__title">{{ item.product.title | escape }}</a>
+
+                  {%- unless item.product.has_only_default_variant -%}
+                    <div class="cart-item__variant">{{ item.variant.title }}</div>
+                  {%- endunless -%}
+
+                  {%- for property in item.properties -%}
+                    {%- unless property.last == blank -%}
+                      <div class="cart-item__variant">{{ property.first }}: {{ property.last }}</div>
+                    {%- endunless -%}
+                  {%- endfor -%}
+
+                  <div class="cart-item__variant">{{ item.original_price | money }}</div>
+
+                  {%- for allocation in item.line_level_discount_allocations -%}
+                    <div class="cart-item__variant">{{ allocation.discount_application.title }} (−{{ allocation.amount | money }})</div>
+                  {%- endfor -%}
+                </td>
+
+                <td>
+                  <div class="quantity-selector" data-quantity>
+                    <button type="button" data-quantity-change="down" aria-label="{{ 'products.product.decrease_quantity' | t }}">−</button>
+                    <input
+                      type="number"
+                      value="{{ item.quantity }}"
+                      min="0"
+                      inputmode="numeric"
+                      aria-label="{{ 'cart.general.quantity' | t }}"
+                      name="updates[]"
+                      data-cart-line="{{ forloop.index }}">
+                    <button type="button" data-quantity-change="up" aria-label="{{ 'products.product.increase_quantity' | t }}">+</button>
+                  </div>
+
+                  <button type="button" class="cart-item__remove" data-cart-remove="{{ forloop.index }}" style="margin-top:0.8rem">
+                    {{ 'cart.general.remove' | t }}
+                  </button>
+                </td>
+
+                <td>
+                  <div class="price">
+                    {%- if item.original_line_price > item.final_line_price -%}
+                      <span class="price__regular">{{ item.final_line_price | money }}</span>
+                      <s class="price__compare">{{ item.original_line_price | money }}</s>
+                    {%- else -%}
+                      <span class="price__regular">{{ item.final_line_price | money }}</span>
+                    {%- endif -%}
+                  </div>
+                </td>
+              </tr>
+            {%- endfor -%}
+          </tbody>
+        </table>
+
+        <div class="cart-page__footer">
+          {%- if settings.cart_show_note -%}
+            <div style="width:100%;max-width:40rem;margin-right:auto">
+              <label class="form__label" for="CartNote">{{ 'cart.general.note' | t }}</label>
+              <textarea id="CartNote" name="note" rows="3" placeholder="{{ 'cart.general.note_placeholder' | t }}">{{ cart.note }}</textarea>
+            </div>
+          {%- endif -%}
+
+          {%- for discount in cart.cart_level_discount_applications -%}
+            <div class="cart-summary__row" style="min-width:26rem">
+              <span>{{ discount.title }}</span>
+              <span>−{{ discount.total_allocated_amount | money }}</span>
+            </div>
+          {%- endfor -%}
+
+          <div class="cart-summary__row cart-summary__row--total" style="min-width:26rem">
+            <span>{{ 'cart.general.subtotal' | t }}</span>
+            <span>{{ cart.total_price | money_with_currency }}</span>
+          </div>
+
+          <p class="cart-summary__note">{{ 'cart.general.taxes_and_shipping' | t }}</p>
+
+          <button type="submit" name="update" class="btn btn--secondary">{{ 'cart.general.update' | t }}</button>
+          <button type="submit" name="checkout" class="btn">{{ 'cart.general.checkout' | t }}</button>
+
+          {%- if additional_checkout_buttons -%}
+            <div style="margin-top:1rem">{{ content_for_additional_checkout_buttons }}</div>
+          {%- endif -%}
+        </div>
+      </form>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Cart",
+  "settings": []
+}
+{% endschema %}

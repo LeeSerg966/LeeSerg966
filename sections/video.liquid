@@ -1,0 +1,129 @@
+<div class="section{% if section.settings.surface %} section--surface{% endif %}">
+  <div class="page-width{% if section.settings.narrow %} page-width--narrow{% endif %}">
+    {%- if section.settings.heading != blank or section.settings.description != blank -%}
+      <div class="section-header section-header--center">
+        <div class="section-header__text">
+          {%- if section.settings.eyebrow != blank -%}
+            <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+          {%- endif -%}
+          {%- if section.settings.heading != blank -%}
+            <h2>{{ section.settings.heading }}</h2>
+          {%- endif -%}
+          {%- if section.settings.description != blank -%}
+            <p>{{ section.settings.description }}</p>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endif -%}
+
+    <div class="video-section video-section--{{ section.settings.ratio }}">
+      {%- if section.settings.video != blank -%}
+        {%- comment -%}Shopify-hosted video: poster first, real player on click.{%- endcomment -%}
+        <deferred-media class="video-section__wrapper" data-poster>
+          <button type="button" class="video-section__poster" data-deferred-play aria-label="Play video">
+            {%- if section.settings.cover_image != blank -%}
+              <img
+                src="{{ section.settings.cover_image | image_url: width: 1600 }}"
+                srcset="{{ section.settings.cover_image | image_url: width: 800 }} 800w, {{ section.settings.cover_image | image_url: width: 1600 }} 1600w"
+                sizes="(min-width: 990px) 1100px, 100vw"
+                alt="{{ section.settings.cover_image.alt | escape }}"
+                width="{{ section.settings.cover_image.width }}"
+                height="{{ section.settings.cover_image.height }}"
+                loading="lazy">
+            {%- else -%}
+              {{ section.settings.video.preview_image | image_url: width: 1600 | image_tag: loading: 'lazy', alt: '' }}
+            {%- endif -%}
+            <span class="video-section__play" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5Z"/></svg>
+            </span>
+          </button>
+
+          <template>
+            {{ section.settings.video | video_tag: image_size: '1600x', controls: true, playsinline: true, autoplay: true }}
+          </template>
+        </deferred-media>
+
+      {%- elsif section.settings.video_url != blank -%}
+        {%- comment -%}External YouTube / Vimeo: click-to-load keeps the page fast.{%- endcomment -%}
+        <deferred-media class="video-section__wrapper">
+          <button type="button" class="video-section__poster" data-deferred-play aria-label="Play video">
+            {%- if section.settings.cover_image != blank -%}
+              <img
+                src="{{ section.settings.cover_image | image_url: width: 1600 }}"
+                alt="{{ section.settings.cover_image.alt | escape }}"
+                width="{{ section.settings.cover_image.width }}"
+                height="{{ section.settings.cover_image.height }}"
+                loading="lazy">
+            {%- else -%}
+              <span class="video-section__placeholder">{{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}</span>
+            {%- endif -%}
+            <span class="video-section__play" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5Z"/></svg>
+            </span>
+          </button>
+
+          <template>
+            {%- if section.settings.video_url.type == 'youtube' -%}
+              <iframe
+                src="https://www.youtube.com/embed/{{ section.settings.video_url.id }}?autoplay=1&rel=0&playsinline=1"
+                title="{{ section.settings.heading | escape }}"
+                allow="autoplay; encrypted-media; picture-in-picture"
+                allowfullscreen
+                loading="lazy"></iframe>
+            {%- else -%}
+              <iframe
+                src="https://player.vimeo.com/video/{{ section.settings.video_url.id }}?autoplay=1&title=0&byline=0"
+                title="{{ section.settings.heading | escape }}"
+                allow="autoplay; fullscreen; picture-in-picture"
+                allowfullscreen
+                loading="lazy"></iframe>
+            {%- endif -%}
+          </template>
+        </deferred-media>
+      {%- else -%}
+        <div class="video-section__wrapper">
+          {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.caption != blank -%}
+      <p class="text-center text-muted" style="margin-top:1.6rem;font-size:1.4rem">{{ section.settings.caption }}</p>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Video",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "See it in action" },
+    { "type": "textarea", "id": "description", "label": "Description", "default": "Ninety seconds from muddy paws to clean floors." },
+    { "type": "video", "id": "video", "label": "Video (uploaded to Shopify)" },
+    {
+      "type": "video_url",
+      "id": "video_url",
+      "label": "Or a YouTube / Vimeo URL",
+      "accept": ["youtube", "vimeo"],
+      "info": "Used only when no uploaded video is selected."
+    },
+    { "type": "image_picker", "id": "cover_image", "label": "Cover image" },
+    { "type": "text", "id": "caption", "label": "Caption" },
+    {
+      "type": "select",
+      "id": "ratio",
+      "label": "Aspect ratio",
+      "options": [
+        { "value": "wide", "label": "16:9" },
+        { "value": "square", "label": "1:1" },
+        { "value": "portrait", "label": "4:5" }
+      ],
+      "default": "wide"
+    },
+    { "type": "checkbox", "id": "narrow", "label": "Narrow width", "default": false },
+    { "type": "checkbox", "id": "surface", "label": "Tinted background", "default": false }
+  ],
+  "presets": [{ "name": "Video" }]
+}
+{% endschema %}

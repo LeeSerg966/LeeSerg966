@@ -1,0 +1,175 @@
+<header class="header-wrapper">
+  <div class="page-width header">
+    <div class="header__start">
+      <button type="button" class="header__icon header__icon--menu" data-panel-open="MobileMenu" aria-label="{{ 'general.accessibility.menu' | t }}">
+        {% render 'icon', icon: 'menu' %}
+      </button>
+
+      <a href="{{ routes.root_url }}" class="header__logo">
+        {%- if section.settings.logo != blank -%}
+          <img
+            src="{{ section.settings.logo | image_url: width: 400 }}"
+            alt="{{ shop.name | escape }}"
+            width="{{ section.settings.logo.width }}"
+            height="{{ section.settings.logo.height }}"
+            style="max-width: {{ section.settings.logo_width }}px">
+        {%- else -%}
+          {% render 'icon', icon: 'paw' %}
+          {{ shop.name }}
+        {%- endif -%}
+      </a>
+    </div>
+
+    <nav class="header__nav" role="navigation" aria-label="{{ 'general.accessibility.menu' | t }}">
+      {%- for link in section.settings.menu.links -%}
+        <div class="nav__item">
+          <a href="{{ link.url }}" class="nav__link"{% if link.active %} aria-current="page"{% endif %}>
+            {{ link.title }}
+            {%- if link.links.size > 0 -%}
+              {% render 'icon', icon: 'chevron-down' %}
+            {%- endif -%}
+          </a>
+
+          {%- if link.links.size > 0 -%}
+            <ul class="nav__dropdown">
+              {%- for child in link.links -%}
+                <li><a href="{{ child.url }}">{{ child.title }}</a></li>
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </nav>
+
+    <div class="header__actions">
+      <button type="button" class="header__icon" data-panel-open="SearchPanel" aria-label="{{ 'general.accessibility.search' | t }}">
+        {% render 'icon', icon: 'search' %}
+      </button>
+
+      {%- if shop.customer_accounts_enabled -%}
+        <a href="{{ routes.account_url }}" class="header__icon" aria-label="{{ 'general.accessibility.account' | t }}">
+          {% render 'icon', icon: 'account' %}
+        </a>
+      {%- endif -%}
+
+      {%- if settings.cart_drawer_enabled -%}
+        <button type="button" class="header__icon" data-panel-open="CartDrawer" aria-label="{{ 'general.accessibility.cart' | t }}">
+          {% render 'icon', icon: 'cart' %}
+          <span class="cart-count" data-cart-count{% if cart.item_count == 0 %} hidden{% endif %}>{{ cart.item_count }}</span>
+        </button>
+      {%- else -%}
+        <a href="{{ routes.cart_url }}" class="header__icon" aria-label="{{ 'general.accessibility.cart' | t }}">
+          {% render 'icon', icon: 'cart' %}
+          <span class="cart-count" data-cart-count{% if cart.item_count == 0 %} hidden{% endif %}>{{ cart.item_count }}</span>
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</header>
+
+{%- comment -%}Mobile navigation{%- endcomment -%}
+<div class="panel panel--left" id="MobileMenu" aria-hidden="true" role="dialog" aria-modal="true" aria-label="{{ 'general.accessibility.menu' | t }}">
+  <div class="panel__overlay" data-panel-close></div>
+  <div class="panel__content">
+    <div class="panel__header">
+      <h2>{{ 'general.accessibility.menu' | t }}</h2>
+      <button type="button" class="panel__close" data-panel-close aria-label="{{ 'general.accessibility.close' | t }}" data-panel-focus>
+        {% render 'icon', icon: 'close' %}
+      </button>
+    </div>
+
+    <div class="panel__body">
+      <ul class="mobile-nav">
+        {%- for link in section.settings.menu.links -%}
+          <li>
+            {%- if link.links.size > 0 -%}
+              <details>
+                <summary>
+                  {{ link.title }}
+                  {% render 'icon', icon: 'chevron-down' %}
+                </summary>
+                <ul>
+                  {%- for child in link.links -%}
+                    <li><a href="{{ child.url }}">{{ child.title }}</a></li>
+                  {%- endfor -%}
+                </ul>
+              </details>
+            {%- else -%}
+              <a href="{{ link.url }}">
+                {{ link.title }}
+                {% render 'icon', icon: 'chevron-right' %}
+              </a>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+
+    {%- if shop.customer_accounts_enabled -%}
+      <div class="panel__footer">
+        <a href="{{ routes.account_url }}" class="btn btn--secondary btn--full">
+          {% render 'icon', icon: 'account' %}
+          {{ 'customer.account.title' | t }}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{%- comment -%}Search{%- endcomment -%}
+<div class="panel panel--top" id="SearchPanel" aria-hidden="true" role="dialog" aria-modal="true" aria-label="{{ 'general.search.title' | t }}">
+  <div class="panel__overlay" data-panel-close></div>
+  <div class="panel__content" style="bottom:auto;max-height:80vh">
+    <div class="panel__header">
+      <h2>{{ 'general.search.title' | t }}</h2>
+      <button type="button" class="panel__close" data-panel-close aria-label="{{ 'general.accessibility.close' | t }}">
+        {% render 'icon', icon: 'close' %}
+      </button>
+    </div>
+
+    <div class="panel__body">
+      <form action="{{ routes.search_url }}" method="get" role="search" class="search-panel__form" data-predictive-search>
+        <input
+          type="search"
+          name="q"
+          value="{{ search.terms | escape }}"
+          placeholder="{{ 'general.search.placeholder' | t }}"
+          autocomplete="off"
+          data-panel-focus>
+        <input type="hidden" name="options[prefix]" value="last">
+        <button type="submit" class="btn">{{ 'general.search.submit' | t }}</button>
+      </form>
+
+      <div class="search-results" data-search-results></div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "label": "Logo width",
+      "min": 60,
+      "max": 260,
+      "step": 10,
+      "unit": "px",
+      "default": 140
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    }
+  ]
+}
+{% endschema %}

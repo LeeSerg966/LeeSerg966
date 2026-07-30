@@ -1,0 +1,82 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": { "type": "vendor", "settings": {} },
+        "title": { "type": "title", "settings": {} },
+        "rating": { "type": "rating", "settings": { "stars": 5, "text": "4.8 · 2,412 reviews" } },
+        "price": { "type": "price", "settings": { "show_taxes_note": true } },
+        "stock": { "type": "stock", "settings": {} },
+        "variant_picker": { "type": "variant_picker", "settings": {} },
+        "buy": { "type": "quantity_and_buy", "settings": { "show_dynamic_checkout": true } },
+        "trust": {
+          "type": "trust",
+          "settings": {
+            "item_1": "Free EU shipping over €50 — ships within 24h",
+            "item_2": "30-day returns, no questions asked",
+            "item_3": "2-year guarantee on all motorised tools"
+          }
+        },
+        "description": { "type": "description", "settings": {} },
+        "shipping": {
+          "type": "collapsible",
+          "settings": {
+            "heading": "Shipping & returns",
+            "content": "<p>Dispatched within 24 hours. Germany and Austria: 2–4 working days. Rest of the EU: 4–7 working days. Free over €50, otherwise €4.90.</p><p>30-day returns — email us for a prepaid label.</p>"
+          }
+        },
+        "share": { "type": "share", "settings": {} }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "rating",
+        "price",
+        "stock",
+        "variant_picker",
+        "buy",
+        "trust",
+        "description",
+        "shipping",
+        "share"
+      ],
+      "settings": {
+        "gallery_layout": "grid"
+      }
+    },
+    "related": {
+      "type": "related-products",
+      "settings": {
+        "heading": "Goes well with",
+        "products_to_show": 4,
+        "columns": 4,
+        "center_heading": true
+      }
+    },
+    "value-props": {
+      "type": "icons-row",
+      "blocks": {
+        "v1": {
+          "type": "item",
+          "settings": { "icon": "truck", "heading": "Free EU shipping", "text": "On every order over €50." }
+        },
+        "v2": {
+          "type": "item",
+          "settings": { "icon": "return", "heading": "30-day returns", "text": "Send it back, no questions asked." }
+        },
+        "v3": {
+          "type": "item",
+          "settings": { "icon": "shield", "heading": "2-year guarantee", "text": "On every motorised tool." }
+        },
+        "v4": {
+          "type": "item",
+          "settings": { "icon": "chat", "heading": "Real humans", "text": "Replies within 24 hours." }
+        }
+      },
+      "block_order": ["v1", "v2", "v3", "v4"],
+      "settings": { "surface": false, "tight": true }
+    }
+  },
+  "order": ["main", "related", "value-props"]
+}

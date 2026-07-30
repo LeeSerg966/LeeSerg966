@@ -1,0 +1,68 @@
+<div class="section">
+  <div class="page-width">
+    <div class="customer customer--wide">
+      <a href="{{ routes.account_url }}" class="link-arrow" style="margin-bottom:1.6rem">
+        {% render 'icon', icon: 'chevron-left' %}
+        {{ 'customer.account.return' | t }}
+      </a>
+
+      <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1.6rem">
+        <h1 style="margin:0">{{ 'customer.addresses.title' | t }}</h1>
+        <button type="button" class="btn btn--small" data-address-toggle="AddressNew">
+          {{ 'customer.addresses.add_new' | t }}
+        </button>
+      </div>
+
+      <div id="AddressNew" class="card-panel" style="margin-top:2.4rem;max-width:52rem" hidden>
+        <h2 class="h4">{{ 'customer.addresses.add_new' | t }}</h2>
+
+        {%- form 'customer_address', customer.new_address -%}
+          {% render 'address-fields', form: form %}
+          <button type="submit" class="btn btn--full">{{ 'customer.addresses.add' | t }}</button>
+        {%- endform -%}
+      </div>
+
+      {%- paginate customer.addresses by 10 -%}
+        <div style="display:grid;gap:2rem;grid-template-columns:repeat(auto-fit,minmax(28rem,1fr));margin-top:3.2rem">
+          {%- for address in customer.addresses -%}
+            <div class="card-panel">
+              {%- if address == customer.default_address -%}
+                <span class="badge badge--muted">{{ 'customer.addresses.default' | t }}</span>
+              {%- endif -%}
+
+              <div style="margin:1.2rem 0">{{ address | format_address }}</div>
+
+              <div style="display:flex;gap:1rem">
+                <button type="button" class="btn btn--secondary btn--small" data-address-toggle="AddressEdit-{{ address.id }}">
+                  {{ 'customer.addresses.edit' | t }}
+                </button>
+
+                {%- assign confirm_text = 'customer.addresses.delete_confirm' | t -%}
+                {%- form 'customer_address', address, data-confirm: confirm_text -%}
+                  <input type="hidden" name="_method" value="delete">
+                  <button type="submit" class="btn btn--secondary btn--small">{{ 'customer.addresses.delete' | t }}</button>
+                {%- endform -%}
+              </div>
+
+              <div id="AddressEdit-{{ address.id }}" style="margin-top:2rem" hidden>
+                {%- form 'customer_address', address -%}
+                  {% render 'address-fields', form: form %}
+                  <button type="submit" class="btn btn--full">{{ 'customer.addresses.update' | t }}</button>
+                {%- endform -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+
+        {% render 'pagination', paginate: paginate %}
+      {%- endpaginate -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Addresses",
+  "settings": []
+}
+{% endschema %}

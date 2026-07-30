@@ -1,0 +1,33 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": { "narrow": true, "center_title": true }
+    },
+    "contact": {
+      "type": "contact-form",
+      "blocks": {
+        "d1": { "type": "item", "settings": { "icon": "chat", "heading": "Email", "text": "hello@kesvaro.com" } },
+        "d2": { "type": "item", "settings": { "icon": "clock", "heading": "Support hours", "text": "Mon–Fri, 9:00–18:00 CET" } },
+        "d3": { "type": "item", "settings": { "icon": "truck", "heading": "Order questions", "text": "Have your order number handy for the fastest reply." } }
+      },
+      "block_order": ["d1", "d2", "d3"],
+      "settings": {
+        "eyebrow": "Contact",
+        "heading": "Talk to a real person",
+        "text": "<p>Questions about sizing, shipping or which grinder suits a nervous dog? Send us a note — we answer every message within 24 hours.</p>",
+        "surface": false
+      }
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "f1": { "type": "faq", "settings": { "question": "Where is my order?", "answer": "<p>You'll get a tracking link by email the moment your parcel ships. If it hasn't moved in 48 hours, reply to that email and we'll chase it.</p>" } },
+        "f2": { "type": "faq", "settings": { "question": "Can I change my address?", "answer": "<p>Yes, if the order hasn't shipped. Email us your order number and the corrected address as soon as you can.</p>" } }
+      },
+      "block_order": ["f1", "f2"],
+      "settings": { "heading": "Before you write", "button_label": "", "open_first": false, "surface": true }
+    }
+  },
+  "order": ["main", "contact", "faq"]
+}

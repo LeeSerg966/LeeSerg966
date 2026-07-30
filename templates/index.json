@@ -1,0 +1,252 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "height": "large",
+        "alignment": "left",
+        "text_light": true,
+        "eyebrow": "Loved by 12,000+ pet parents",
+        "heading": "Grooming days without the drama",
+        "subtitle": "Quiet nail grinders, muddy-paw cleaners and walk-ready gear — made for pets who'd rather be doing anything else.",
+        "button_label": "Shop bestsellers",
+        "button_label_2": "See how it works",
+        "point_1": "Free EU shipping over €50",
+        "point_2": "30-day returns",
+        "point_3": "Ships within 24 hours"
+      }
+    },
+    "marquee": {
+      "type": "marquee",
+      "blocks": {
+        "m1": { "type": "item", "settings": { "text": "Free EU shipping over €50", "icon": "truck" } },
+        "m2": { "type": "item", "settings": { "text": "30-day returns", "icon": "return" } },
+        "m3": { "type": "item", "settings": { "text": "4.8 / 5 from 2,400+ reviews", "icon": "star" } },
+        "m4": { "type": "item", "settings": { "text": "2-year guarantee", "icon": "shield" } },
+        "m5": { "type": "item", "settings": { "text": "Tested on very wriggly dogs", "icon": "paw" } }
+      },
+      "block_order": ["m1", "m2", "m3", "m4", "m5"],
+      "settings": {}
+    },
+    "featured": {
+      "type": "featured-collection",
+      "settings": {
+        "eyebrow": "This month's favourites",
+        "heading": "Bestsellers",
+        "description": "The four products our customers keep coming back for.",
+        "products_to_show": 4,
+        "columns": 4,
+        "show_view_all": true,
+        "center_heading": false,
+        "surface": false
+      }
+    },
+    "categories": {
+      "type": "collection-list",
+      "blocks": {
+        "c1": { "type": "collection", "settings": {} },
+        "c2": { "type": "collection", "settings": {} },
+        "c3": { "type": "collection", "settings": {} }
+      },
+      "block_order": ["c1", "c2", "c3"],
+      "settings": {
+        "heading": "Shop by category",
+        "description": "Grooming, walking, travelling — everything sorted by the job it does.",
+        "columns": 3,
+        "image_ratio": "portrait",
+        "show_count": true,
+        "center_heading": false,
+        "surface": false
+      }
+    },
+    "video": {
+      "type": "video",
+      "settings": {
+        "eyebrow": "60 seconds",
+        "heading": "See it in action",
+        "description": "From muddy paws to clean floors, without the bathtub standoff.",
+        "ratio": "wide",
+        "narrow": false,
+        "surface": true
+      }
+    },
+    "image-with-text": {
+      "type": "image-with-text",
+      "blocks": {
+        "p1": {
+          "type": "point",
+          "settings": {
+            "heading": "Whisper-quiet motor",
+            "text": "Under 50 dB, so nervous pets stay calm instead of bolting."
+          }
+        },
+        "p2": {
+          "type": "point",
+          "settings": {
+            "heading": "LED-lit guard",
+            "text": "See the quick before you cut. No guessing, no bleeding."
+          }
+        },
+        "p3": {
+          "type": "point",
+          "settings": {
+            "heading": "USB-C, 3-hour runtime",
+            "text": "Charge it once a month, not once a session."
+          }
+        }
+      },
+      "block_order": ["p1", "p2", "p3"],
+      "settings": {
+        "eyebrow": "Why it works",
+        "heading": "Built for the pets who hate sitting still",
+        "text": "<p>Every tool we ship is tested on real dogs and cats — the wriggly ones, the nervous ones, the ones who hear the clipper and vanish under the sofa. If it doesn't work on them, it doesn't get made.</p>",
+        "button_label": "Shop grooming tools",
+        "reverse": false,
+        "surface": false
+      }
+    },
+    "value-props": {
+      "type": "icons-row",
+      "blocks": {
+        "v1": {
+          "type": "item",
+          "settings": { "icon": "truck", "heading": "Free EU shipping", "text": "On every order over €50, tracked door to door." }
+        },
+        "v2": {
+          "type": "item",
+          "settings": { "icon": "return", "heading": "30-day returns", "text": "Not the right fit? Send it back, no questions asked." }
+        },
+        "v3": {
+          "type": "item",
+          "settings": { "icon": "shield", "heading": "2-year guarantee", "text": "Every motorised tool is covered for two full years." }
+        },
+        "v4": {
+          "type": "item",
+          "settings": { "icon": "chat", "heading": "Real humans", "text": "Pet-owning support team, replies within 24 hours." }
+        }
+      },
+      "block_order": ["v1", "v2", "v3", "v4"],
+      "settings": { "surface": true, "tight": false }
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "blocks": {
+        "t1": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "My spaniel used to hide the second she saw the clippers. With the grinder she just falls asleep on my lap. First time in four years I've done her nails alone.",
+            "author": "Marta K.",
+            "meta": "Berlin · Verified buyer"
+          }
+        },
+        "t2": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "Two labs, one muddy field, one paw cleaner. My hallway has never survived a winter this well.",
+            "author": "Jonas B.",
+            "meta": "Hamburg · Verified buyer"
+          }
+        },
+        "t3": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "Ordered Tuesday, arrived Thursday, and support actually answered my sizing question in an hour. Rare these days.",
+            "author": "Sofie D.",
+            "meta": "Vienna · Verified buyer"
+          }
+        }
+      },
+      "block_order": ["t1", "t2", "t3"],
+      "settings": {
+        "eyebrow": "4.8 / 5 from 2,400+ reviews",
+        "heading": "What pet parents say",
+        "surface": true
+      }
+    },
+    "gallery": {
+      "type": "gallery",
+      "blocks": {
+        "g1": { "type": "image", "settings": { "wide": true, "tall": true } },
+        "g2": { "type": "image", "settings": {} },
+        "g3": { "type": "image", "settings": {} },
+        "g4": { "type": "video", "settings": {} },
+        "g5": { "type": "image", "settings": {} }
+      },
+      "block_order": ["g1", "g2", "g3", "g4", "g5"],
+      "settings": {
+        "eyebrow": "#KesvaroPets",
+        "heading": "From our community",
+        "description": "Tag us and your good boy might end up here.",
+        "layout": "mosaic",
+        "columns": 3,
+        "center_heading": true,
+        "surface": false
+      }
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "f1": {
+          "type": "faq",
+          "settings": {
+            "question": "How long does delivery take?",
+            "answer": "<p>Orders leave our warehouse within 24 hours. Germany and Austria: 2–4 working days. Rest of the EU: 4–7 working days. You'll get a tracking link the moment it ships.</p>"
+          }
+        },
+        "f2": {
+          "type": "faq",
+          "settings": {
+            "question": "Will the grinder scare my dog?",
+            "answer": "<p>It runs under 50 dB — roughly the volume of a fridge. Most dogs settle within two sessions. Start with the motor on but away from the paw, reward, then work up to a single nail.</p>"
+          }
+        },
+        "f3": {
+          "type": "faq",
+          "settings": {
+            "question": "What's your returns policy?",
+            "answer": "<p>30 days from delivery, used or unused. Email us and we'll send a prepaid label — refunds land within five working days of the parcel reaching us.</p>"
+          }
+        },
+        "f4": {
+          "type": "faq",
+          "settings": {
+            "question": "How do I pick the right size?",
+            "answer": "<p>Every apparel listing has a measurement chart based on back length, not weight. Measure from collar to tail base — when between sizes, size up.</p>"
+          }
+        }
+      },
+      "block_order": ["f1", "f2", "f3", "f4"],
+      "settings": {
+        "heading": "Questions, answered",
+        "button_label": "Contact us",
+        "open_first": true,
+        "surface": false
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "heading": "10% off your first order",
+        "description": "Join 12,000 pet parents getting care tips, new drops and subscriber-only offers.",
+        "footnote": "No spam. Unsubscribe any time.",
+        "surface": true
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "marquee",
+    "featured",
+    "categories",
+    "video",
+    "image-with-text",
+    "value-props",
+    "testimonials",
+    "gallery",
+    "faq",
+    "newsletter"
+  ]
+}

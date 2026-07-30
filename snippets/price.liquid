@@ -1,0 +1,56 @@
+{%- comment -%}
+  Renders a price block.
+  Accepts:
+    - product {Object} product or variant (required)
+    - use_variant {Boolean} price the selected/first variant instead of the range
+    - large {Boolean} bigger type
+    - show_badges {Boolean} render a "Save X" badge
+{%- endcomment -%}
+
+{%- liquid
+  if product.variants
+    if use_variant
+      assign target = product.selected_or_first_available_variant
+    else
+      assign target = product
+    endif
+  else
+    assign target = product
+  endif
+
+  assign price = target.price | default: 0
+  assign compare_at = target.compare_at_price | default: 0
+  assign on_sale = false
+  if compare_at > price
+    assign on_sale = true
+  endif
+
+  assign price_varies = false
+  if product.price_varies and use_variant != true
+    assign price_varies = true
+  endif
+-%}
+
+<div class="price{% if on_sale %} price--on-sale{% endif %}{% if large %} price--large{% endif %}">
+  <span class="price__regular">
+    {%- if price_varies -%}
+      {{ 'products.facets.from' | t }} {{ product.price_min | money }}
+    {%- else -%}
+      {{ price | money }}
+    {%- endif -%}
+  </span>
+
+  {%- if on_sale -%}
+    <s class="price__compare">{{ compare_at | money }}</s>
+    {%- if show_badges -%}
+      {%- assign savings = compare_at | minus: price | money -%}
+      <span class="badge badge--sale">{{ 'products.product.save_amount' | t: amount: savings }}</span>
+    {%- endif -%}
+  {%- endif -%}
+
+  {%- if target.unit_price_measurement -%}
+    <span class="price__unit">
+      {{ target.unit_price | money }} / {% if target.unit_price_measurement.reference_value != 1 %}{{ target.unit_price_measurement.reference_value }}{% endif %}{{ target.unit_price_measurement.reference_unit }}
+    </span>
+  {%- endif -%}
+</div>

@@ -1,0 +1,59 @@
+<div class="marquee-section" style="background:{{ section.settings.background }};color:{{ section.settings.text_color }}">
+  <div class="marquee">
+    {%- for i in (1..2) -%}
+      <div class="marquee__track" aria-hidden="{% if forloop.first %}false{% else %}true{% endif %}">
+        {%- for block in section.blocks -%}
+          <span class="marquee__item" style="color:inherit" {{ block.shopify_attributes }}>
+            {% render 'icon', icon: block.settings.icon %}
+            {{ block.settings.text }}
+          </span>
+        {%- endfor -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Scrolling bar",
+  "max_blocks": 8,
+  "settings": [
+    { "type": "color", "id": "background", "label": "Background", "default": "#F5EFE6" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#5C665E" }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Text", "default": "Free EU shipping over €50" },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "paw", "label": "Paw" },
+            { "value": "truck", "label": "Shipping" },
+            { "value": "star", "label": "Star" },
+            { "value": "heart", "label": "Heart" },
+            { "value": "shield", "label": "Guarantee" },
+            { "value": "return", "label": "Returns" }
+          ],
+          "default": "paw"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Scrolling bar",
+      "blocks": [
+        { "type": "item", "settings": { "text": "Free EU shipping over €50", "icon": "truck" } },
+        { "type": "item", "settings": { "text": "30-day returns", "icon": "return" } },
+        { "type": "item", "settings": { "text": "4.8 / 5 from 2,400+ reviews", "icon": "star" } },
+        { "type": "item", "settings": { "text": "Vet-approved designs", "icon": "shield" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

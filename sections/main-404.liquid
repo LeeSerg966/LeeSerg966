@@ -1,0 +1,23 @@
+<div class="section">
+  <div class="page-width page-width--narrow text-center">
+    <span class="eyebrow">404</span>
+    <h1>{{ 'sections.404.title' | t }}</h1>
+    <p class="text-muted">{{ 'sections.404.subtext' | t }}</p>
+
+    <form action="{{ routes.search_url }}" method="get" role="search" class="search-panel__form" style="max-width:44rem;margin:3.2rem auto 0">
+      <input type="search" name="q" placeholder="{{ 'general.search.placeholder' | t }}" aria-label="{{ 'general.search.title' | t }}">
+      <button type="submit" class="btn">{{ 'general.search.submit' | t }}</button>
+    </form>
+
+    <p style="margin-top:2.4rem">
+      <a href="{{ routes.root_url }}" class="btn btn--secondary">{{ 'sections.404.cta' | t }}</a>
+    </p>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "404",
+  "settings": []
+}
+{% endschema %}

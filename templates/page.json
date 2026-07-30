@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": { "narrow": true, "center_title": false }
+    }
+  },
+  "order": ["main"]
+}

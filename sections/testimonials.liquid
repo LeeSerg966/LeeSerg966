@@ -1,0 +1,88 @@
+<div class="section{% if section.settings.surface %} section--surface{% endif %}">
+  <div class="page-width">
+    <div class="section-header section-header--center">
+      <div class="section-header__text">
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2>{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.description != blank -%}
+          <p>{{ section.settings.description }}</p>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="testimonials" style="--columns: {{ section.blocks.size | at_most: 3 }}">
+      {%- for block in section.blocks -%}
+        <blockquote class="testimonial" {{ block.shopify_attributes }}>
+          {%- if block.settings.rating > 0 -%}
+            <div class="rating">
+              <span class="rating__stars" aria-hidden="true">
+                {%- for i in (1..block.settings.rating) -%}★{%- endfor -%}
+              </span>
+              <span class="visually-hidden">{{ block.settings.rating }} / 5</span>
+            </div>
+          {%- endif -%}
+
+          <p class="testimonial__quote">{{ block.settings.quote }}</p>
+
+          <div style="display:flex;align-items:center;gap:1.2rem;margin-top:auto">
+            {%- if block.settings.image != blank -%}
+              <img
+                src="{{ block.settings.image | image_url: width: 96 }}"
+                alt="{{ block.settings.author | escape }}"
+                width="48"
+                height="48"
+                loading="lazy">
+            {%- endif -%}
+            <span>
+              <span class="testimonial__author">{{ block.settings.author }}</span>
+              {%- if block.settings.meta != blank -%}
+                <span class="testimonial__meta" style="display:block">{{ block.settings.meta }}</span>
+              {%- endif -%}
+            </span>
+          </div>
+        </blockquote>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "4.8 / 5 from 2,400+ reviews" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "What pet parents say" },
+    { "type": "textarea", "id": "description", "label": "Description" },
+    { "type": "checkbox", "id": "surface", "label": "Tinted background", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        { "type": "range", "id": "rating", "label": "Rating", "min": 0, "max": 5, "step": 1, "default": 5 },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "My spaniel used to hide the second she saw the clippers. With the grinder she just falls asleep on my lap. First time in four years I've done her nails alone."
+        },
+        { "type": "text", "id": "author", "label": "Author", "default": "Marta K." },
+        { "type": "text", "id": "meta", "label": "Meta", "default": "Berlin · Verified buyer" },
+        { "type": "image_picker", "id": "image", "label": "Photo" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonials",
+      "blocks": [{ "type": "testimonial" }, { "type": "testimonial" }, { "type": "testimonial" }]
+    }
+  ]
+}
+{% endschema %}

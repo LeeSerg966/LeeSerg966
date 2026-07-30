@@ -1,0 +1,111 @@
+<article class="section">
+  <div class="page-width page-width--narrow">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <a href="{{ routes.root_url }}">{{ 'general.breadcrumbs.home' | t }}</a>
+      {% render 'icon', icon: 'chevron-right' %}
+      <a href="{{ blog.url }}">{{ blog.title }}</a>
+    </nav>
+
+    <header class="text-center" style="margin-bottom:3.2rem">
+      <div class="text-muted" style="font-size:1.4rem;margin-bottom:1.2rem">
+        {{ article.published_at | date: format: 'date' }}
+        {%- if article.author != blank %} · {{ article.author }}{% endif -%}
+      </div>
+      <h1>{{ article.title }}</h1>
+    </header>
+
+    {%- if article.image -%}
+      <img
+        src="{{ article.image | image_url: width: 1400 }}"
+        srcset="{{ article.image | image_url: width: 700 }} 700w, {{ article.image | image_url: width: 1400 }} 1400w"
+        sizes="(min-width: 990px) 760px, 100vw"
+        alt="{{ article.image.alt | escape }}"
+        width="{{ article.image.width }}"
+        height="{{ article.image.height }}"
+        style="border-radius:var(--radius);margin-bottom:3.2rem"
+        fetchpriority="high">
+    {%- endif -%}
+
+    <div class="rte">{{ article.content }}</div>
+
+    {%- if article.tags.size > 0 -%}
+      <div class="active-facets" style="margin-top:3.2rem">
+        {%- for tag in article.tags -%}
+          <a href="{{ blog.url }}/tagged/{{ tag | handle }}" class="active-facet">{{ tag }}</a>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    <hr class="divider">
+
+    <a href="{{ blog.url }}" class="link-arrow">
+      {% render 'icon', icon: 'chevron-left' %}
+      {{ 'blogs.article.back_to_blog' | t: title: blog.title }}
+    </a>
+
+    {%- if blog.comments_enabled? -%}
+      <div id="comments" style="margin-top:4.8rem">
+        <h2 class="h3">{{ 'blogs.article.comments' | t: count: article.comments_count }}</h2>
+
+        {%- if article.comments_count > 0 -%}
+          <div class="stack" style="margin-bottom:3.2rem">
+            {%- for comment in article.comments -%}
+              <div class="card-panel">
+                <div class="rte">{{ comment.content }}</div>
+                <div class="text-muted" style="font-size:1.3rem;margin-top:1.2rem">
+                  {{ comment.author }} · {{ comment.created_at | date: format: 'date' }}
+                </div>
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+        {%- form 'new_comment', article -%}
+          {%- if form.posted_successfully? -%}
+            <p class="form-message form-message--success">
+              {%- if blog.moderated? -%}
+                {{ 'blogs.article.success_moderated' | t }}
+              {%- else -%}
+                {{ 'blogs.article.success' | t }}
+              {%- endif -%}
+            </p>
+          {%- elsif form.errors -%}
+            <div class="form-message form-message--error">
+              {{ form.errors | default_errors }}
+            </div>
+          {%- endif -%}
+
+          <h3 class="h4">{{ 'blogs.article.title' | t }}</h3>
+
+          <div class="field">
+            <label for="CommentAuthor">{{ 'blogs.article.name' | t }}</label>
+            <input type="text" id="CommentAuthor" name="comment[author]" value="{{ form.author }}" required>
+          </div>
+
+          <div class="field">
+            <label for="CommentEmail">{{ 'blogs.article.email' | t }}</label>
+            <input type="email" id="CommentEmail" name="comment[email]" value="{{ form.email }}" required>
+          </div>
+
+          <div class="field">
+            <label for="CommentBody">{{ 'blogs.article.message' | t }}</label>
+            <textarea id="CommentBody" name="comment[body]" rows="5" required>{{ form.body }}</textarea>
+          </div>
+
+          {%- if blog.moderated? -%}
+            <p class="text-muted" style="font-size:1.3rem">{{ 'blogs.article.moderated' | t }}</p>
+          {%- endif -%}
+
+          <button type="submit" class="btn">{{ 'blogs.article.post' | t }}</button>
+        {%- endform -%}
+      </div>
+    {%- endif -%}
+  </div>
+</article>
+
+{% schema %}
+{
+  "name": "Article",
+  "settings": []
+}
+{% endschema %}

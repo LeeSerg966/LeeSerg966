@@ -1,0 +1,140 @@
+<div class="section{% if section.settings.surface %} section--surface{% endif %}">
+  <div class="page-width">
+    {%- if section.settings.heading != blank -%}
+      <div class="section-header{% if section.settings.center_heading %} section-header--center{% endif %}">
+        <div class="section-header__text">
+          {%- if section.settings.eyebrow != blank -%}
+            <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+          {%- endif -%}
+          <h2>{{ section.settings.heading }}</h2>
+          {%- if section.settings.description != blank -%}
+            <p>{{ section.settings.description }}</p>
+          {%- endif -%}
+        </div>
+
+        {%- if section.settings.link_label != blank -%}
+          <a href="{{ section.settings.link_url }}" class="link-arrow">
+            {{ section.settings.link_label }}
+            {% render 'icon', icon: 'arrow-right' %}
+          </a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="gallery gallery--{{ section.settings.layout }}" style="--columns: {{ section.settings.columns }}">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'image' -%}
+            <figure class="gallery__item{% if block.settings.wide %} gallery__item--wide{% endif %}{% if block.settings.tall %} gallery__item--tall{% endif %}" {{ block.shopify_attributes }}>
+              {%- if block.settings.image != blank -%}
+                <button
+                  type="button"
+                  class="gallery__trigger"
+                  data-lightbox="{{ block.settings.image | image_url: width: 1800 }}"
+                  data-lightbox-caption="{{ block.settings.caption | escape }}"
+                  aria-label="{{ block.settings.caption | default: 'Open image' | escape }}">
+                  <img
+                    src="{{ block.settings.image | image_url: width: 900 }}"
+                    srcset="{{ block.settings.image | image_url: width: 500 }} 500w, {{ block.settings.image | image_url: width: 900 }} 900w, {{ block.settings.image | image_url: width: 1400 }} 1400w"
+                    sizes="(min-width: 990px) 33vw, 50vw"
+                    alt="{{ block.settings.image.alt | escape }}"
+                    width="{{ block.settings.image.width }}"
+                    height="{{ block.settings.image.height }}"
+                    loading="lazy">
+                </button>
+              {%- else -%}
+                {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif -%}
+
+              {%- if block.settings.caption != blank -%}
+                <figcaption>{{ block.settings.caption }}</figcaption>
+              {%- endif -%}
+            </figure>
+
+          {%- when 'video' -%}
+            <figure class="gallery__item{% if block.settings.wide %} gallery__item--wide{% endif %}{% if block.settings.tall %} gallery__item--tall{% endif %}" {{ block.shopify_attributes }}>
+              {%- if block.settings.video != blank -%}
+                {{
+                  block.settings.video
+                  | video_tag:
+                    image_size: '900x',
+                    autoplay: true,
+                    loop: true,
+                    muted: true,
+                    controls: false,
+                    playsinline: true
+                }}
+              {%- else -%}
+                {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif -%}
+
+              {%- if block.settings.caption != blank -%}
+                <figcaption>{{ block.settings.caption }}</figcaption>
+              {%- endif -%}
+            </figure>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Gallery",
+  "max_blocks": 12,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "From our community" },
+    { "type": "textarea", "id": "description", "label": "Description", "default": "Tag @yourbrand for a chance to be featured." },
+    { "type": "text", "id": "link_label", "label": "Link label" },
+    { "type": "url", "id": "link_url", "label": "Link" },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        { "value": "grid", "label": "Even grid" },
+        { "value": "mosaic", "label": "Mosaic" }
+      ],
+      "default": "mosaic"
+    },
+    { "type": "range", "id": "columns", "label": "Columns on desktop", "min": 2, "max": 4, "step": 1, "default": 3 },
+    { "type": "checkbox", "id": "center_heading", "label": "Center heading", "default": true },
+    { "type": "checkbox", "id": "surface", "label": "Tinted background", "default": false }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "caption", "label": "Caption" },
+        { "type": "checkbox", "id": "wide", "label": "Span two columns", "default": false },
+        { "type": "checkbox", "id": "tall", "label": "Span two rows", "default": false }
+      ]
+    },
+    {
+      "type": "video",
+      "name": "Video",
+      "settings": [
+        { "type": "video", "id": "video", "label": "Video", "info": "Plays muted on loop." },
+        { "type": "text", "id": "caption", "label": "Caption" },
+        { "type": "checkbox", "id": "wide", "label": "Span two columns", "default": false },
+        { "type": "checkbox", "id": "tall", "label": "Span two rows", "default": false }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Gallery",
+      "blocks": [
+        { "type": "image", "settings": { "wide": true, "tall": true } },
+        { "type": "image" },
+        { "type": "image" },
+        { "type": "video" },
+        { "type": "image" }
+      ]
+    }
+  ]
+}
+{% endschema %}

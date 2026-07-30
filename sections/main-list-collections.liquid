@@ -1,0 +1,58 @@
+{%- paginate collections by 24 -%}
+  <div class="section">
+    <div class="page-width">
+      <h1>{{ page_title }}</h1>
+
+      <ul class="collection-list" style="--columns: {{ section.settings.columns }};margin-top:3.2rem">
+        {%- for collection in collections -%}
+          <li>
+            <a href="{{ collection.url }}" class="collection-card">
+              <div class="media media--{{ section.settings.image_ratio }}">
+                {%- if collection.featured_image -%}
+                  <img
+                    src="{{ collection.featured_image | image_url: width: 900 }}"
+                    srcset="{{ collection.featured_image | image_url: width: 500 }} 500w, {{ collection.featured_image | image_url: width: 900 }} 900w"
+                    sizes="(min-width: 750px) 33vw, 50vw"
+                    alt="{{ collection.featured_image.alt | escape }}"
+                    width="{{ collection.featured_image.width }}"
+                    height="{{ collection.featured_image.height }}"
+                    loading="lazy">
+                {%- else -%}
+                  {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                {%- endif -%}
+                <span class="collection-card__overlay"></span>
+              </div>
+
+              <div class="collection-card__content">
+                <h3>{{ collection.title }}</h3>
+                <span class="collection-card__count">{{ collection.all_products_count }} products</span>
+              </div>
+            </a>
+          </li>
+        {%- endfor -%}
+      </ul>
+
+      {% render 'pagination', paginate: paginate %}
+    </div>
+  </div>
+{%- endpaginate -%}
+
+{% schema %}
+{
+  "name": "Collections list",
+  "settings": [
+    { "type": "range", "id": "columns", "label": "Columns on desktop", "min": 2, "max": 4, "step": 1, "default": 3 },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image ratio",
+      "options": [
+        { "value": "square", "label": "Square" },
+        { "value": "portrait", "label": "Portrait" },
+        { "value": "landscape", "label": "Landscape" }
+      ],
+      "default": "portrait"
+    }
+  ]
+}
+{% endschema %}

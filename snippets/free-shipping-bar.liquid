@@ -1,0 +1,32 @@
+{%- comment -%}
+  Free-shipping progress bar. Hidden when the threshold setting is empty.
+{%- endcomment -%}
+
+{%- liquid
+  assign threshold_setting = settings.cart_free_shipping_threshold | strip
+  assign threshold = threshold_setting | times: 100
+-%}
+
+{%- if threshold_setting != blank and threshold > 0 -%}
+  {%- liquid
+    assign remaining = threshold | minus: cart.total_price
+    assign percent = cart.total_price | times: 100 | divided_by: threshold
+    if percent > 100
+      assign percent = 100
+    endif
+    assign remaining_money = remaining | money
+  -%}
+
+  <div class="shipping-bar">
+    <p class="shipping-bar__text">
+      {%- if remaining > 0 -%}
+        {{ 'cart.general.free_shipping_progress' | t: amount: remaining_money }}
+      {%- else -%}
+        {{ 'cart.general.free_shipping_reached' | t }}
+      {%- endif -%}
+    </p>
+    <div class="shipping-bar__track">
+      <div class="shipping-bar__fill" style="width: {{ percent }}%"></div>
+    </div>
+  </div>
+{%- endif -%}

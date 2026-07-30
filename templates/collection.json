@@ -1,0 +1,39 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-collection",
+      "settings": {
+        "show_description": true,
+        "show_image": true,
+        "enable_filtering": true,
+        "enable_sorting": true,
+        "columns": 4,
+        "products_per_page": 24
+      }
+    },
+    "value-props": {
+      "type": "icons-row",
+      "blocks": {
+        "v1": {
+          "type": "item",
+          "settings": { "icon": "truck", "heading": "Free EU shipping", "text": "On every order over €50." }
+        },
+        "v2": {
+          "type": "item",
+          "settings": { "icon": "return", "heading": "30-day returns", "text": "Send it back, no questions asked." }
+        },
+        "v3": {
+          "type": "item",
+          "settings": { "icon": "shield", "heading": "2-year guarantee", "text": "On every motorised tool." }
+        },
+        "v4": {
+          "type": "item",
+          "settings": { "icon": "chat", "heading": "Real humans", "text": "Replies within 24 hours." }
+        }
+      },
+      "block_order": ["v1", "v2", "v3", "v4"],
+      "settings": { "surface": true, "tight": true }
+    }
+  },
+  "order": ["main", "value-props"]
+}

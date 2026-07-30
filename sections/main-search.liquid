@@ -1,0 +1,65 @@
+{%- paginate search.results by 24 -%}
+  <div class="section">
+    <div class="page-width">
+      <h1>{{ 'general.search.title' | t }}</h1>
+
+      <form action="{{ routes.search_url }}" method="get" role="search" class="search-panel__form" style="max-width:56rem;margin-bottom:3.2rem">
+        <input
+          type="search"
+          name="q"
+          value="{{ search.terms | escape }}"
+          placeholder="{{ 'general.search.placeholder' | t }}"
+          aria-label="{{ 'general.search.title' | t }}">
+        <input type="hidden" name="options[prefix]" value="last">
+        <button type="submit" class="btn">{{ 'general.search.submit' | t }}</button>
+      </form>
+
+      {%- if search.performed -%}
+        {%- if search.results_count > 0 -%}
+          <p class="text-muted" style="margin-bottom:2.4rem">
+            {{ 'general.search.results_with_count' | t: count: search.results_count }}
+          </p>
+
+          <ul class="product-grid" style="--grid-desktop: 4">
+            {%- for item in search.results -%}
+              <li>
+                {%- case item.object_type -%}
+                  {%- when 'product' -%}
+                    {% render 'product-card', card_product: item %}
+
+                  {%- when 'article' -%}
+                    <a href="{{ item.url }}" class="card-panel" style="display:block;text-decoration:none;height:100%">
+                      <span class="badge badge--muted">Article</span>
+                      <h3 class="h4" style="margin-top:1.2rem">{{ item.title }}</h3>
+                      <p class="text-muted" style="font-size:1.4rem">{{ item.excerpt_or_content | strip_html | truncate: 120 }}</p>
+                    </a>
+
+                  {%- when 'page' -%}
+                    <a href="{{ item.url }}" class="card-panel" style="display:block;text-decoration:none;height:100%">
+                      <span class="badge badge--muted">Page</span>
+                      <h3 class="h4" style="margin-top:1.2rem">{{ item.title }}</h3>
+                      <p class="text-muted" style="font-size:1.4rem">{{ item.content | strip_html | truncate: 120 }}</p>
+                    </a>
+                {%- endcase -%}
+              </li>
+            {%- endfor -%}
+          </ul>
+
+          {% render 'pagination', paginate: paginate %}
+        {%- else -%}
+          <div class="cart-empty">
+            <h2>{{ 'general.search.no_results' | t: terms: search.terms }}</h2>
+            <a href="{{ routes.all_products_collection_url }}" class="btn">{{ 'general.continue_shopping' | t }}</a>
+          </div>
+        {%- endif -%}
+      {%- endif -%}
+    </div>
+  </div>
+{%- endpaginate -%}
+
+{% schema %}
+{
+  "name": "Search results",
+  "settings": []
+}
+{% endschema %}

@@ -1,0 +1,62 @@
+{
+  "settings": {
+    "colors": {
+      "name": "Colors",
+      "background": "Background",
+      "surface": "Surface / cards",
+      "text": "Text",
+      "text_muted": "Secondary text",
+      "accent": "Accent (buttons, links)",
+      "accent_text": "Text on accent",
+      "sale": "Sale price",
+      "border": "Borders"
+    },
+    "typography": {
+      "name": "Typography",
+      "heading_font": "Heading font",
+      "body_font": "Body font",
+      "body_scale": "Body size",
+      "heading_scale": "Heading size",
+      "heading_uppercase": "Uppercase headings"
+    },
+    "layout": {
+      "name": "Layout",
+      "page_width": "Page width",
+      "corner_radius": "Corner radius",
+      "button_style": "Button shape",
+      "button_rounded": "Rounded",
+      "button_pill": "Pill",
+      "button_square": "Square"
+    },
+    "product_cards": {
+      "name": "Product cards",
+      "image_ratio": "Image ratio",
+      "ratio_square": "Square",
+      "ratio_portrait": "Portrait",
+      "ratio_natural": "Natural",
+      "show_vendor": "Show vendor",
+      "show_second_image": "Show second image on hover",
+      "show_quick_add": "Show quick add button"
+    },
+    "cart": {
+      "name": "Cart",
+      "drawer_enabled": "Open cart in a drawer",
+      "drawer_info": "When off, customers go to the cart page after adding a product.",
+      "show_note": "Enable order notes",
+      "free_shipping_threshold": "Free shipping threshold",
+      "free_shipping_info": "Amount in your store currency, numbers only. Leave empty to hide the progress bar."
+    },
+    "social": {
+      "name": "Social media"
+    },
+    "social_sharing": {
+      "name": "Social sharing image",
+      "share_image": "Image"
+    },
+    "favicon": {
+      "name": "Favicon",
+      "favicon": "Favicon image",
+      "info": "Will be scaled down to 32 x 32px"
+    }
+  }
+}

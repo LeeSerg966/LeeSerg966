@@ -1,0 +1,232 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Kesvaro",
+    "theme_version": "1.0.0",
+    "theme_author": "Kesvaro",
+    "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
+    "theme_support_url": "https://help.shopify.com/manual/online-store/themes"
+  },
+  {
+    "name": "t:settings.colors.name",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_background",
+        "label": "t:settings.colors.background",
+        "default": "#FFFDF9"
+      },
+      {
+        "type": "color",
+        "id": "color_surface",
+        "label": "t:settings.colors.surface",
+        "default": "#F5EFE6"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "t:settings.colors.text",
+        "default": "#1E241F"
+      },
+      {
+        "type": "color",
+        "id": "color_text_muted",
+        "label": "t:settings.colors.text_muted",
+        "default": "#5C665E"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "t:settings.colors.accent",
+        "default": "#2E7D5B"
+      },
+      {
+        "type": "color",
+        "id": "color_accent_text",
+        "label": "t:settings.colors.accent_text",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "color_sale",
+        "label": "t:settings.colors.sale",
+        "default": "#C0492F"
+      },
+      {
+        "type": "color",
+        "id": "color_border",
+        "label": "t:settings.colors.border",
+        "default": "#E3DCD0"
+      }
+    ]
+  },
+  {
+    "name": "t:settings.typography.name",
+    "settings": [
+      {
+        "type": "font_picker",
+        "id": "font_heading",
+        "label": "t:settings.typography.heading_font",
+        "default": "assistant_n6"
+      },
+      {
+        "type": "font_picker",
+        "id": "font_body",
+        "label": "t:settings.typography.body_font",
+        "default": "assistant_n4"
+      },
+      {
+        "type": "range",
+        "id": "font_body_scale",
+        "label": "t:settings.typography.body_scale",
+        "min": 90,
+        "max": 120,
+        "step": 5,
+        "unit": "%",
+        "default": 100
+      },
+      {
+        "type": "range",
+        "id": "font_heading_scale",
+        "label": "t:settings.typography.heading_scale",
+        "min": 90,
+        "max": 130,
+        "step": 5,
+        "unit": "%",
+        "default": 100
+      },
+      {
+        "type": "checkbox",
+        "id": "heading_uppercase",
+        "label": "t:settings.typography.heading_uppercase",
+        "default": false
+      }
+    ]
+  },
+  {
+    "name": "t:settings.layout.name",
+    "settings": [
+      {
+        "type": "range",
+        "id": "page_width",
+        "label": "t:settings.layout.page_width",
+        "min": 1100,
+        "max": 1600,
+        "step": 20,
+        "unit": "px",
+        "default": 1280
+      },
+      {
+        "type": "range",
+        "id": "corner_radius",
+        "label": "t:settings.layout.corner_radius",
+        "min": 0,
+        "max": 24,
+        "step": 2,
+        "unit": "px",
+        "default": 14
+      },
+      {
+        "type": "select",
+        "id": "button_style",
+        "label": "t:settings.layout.button_style",
+        "options": [
+          { "value": "rounded", "label": "t:settings.layout.button_rounded" },
+          { "value": "pill", "label": "t:settings.layout.button_pill" },
+          { "value": "square", "label": "t:settings.layout.button_square" }
+        ],
+        "default": "pill"
+      }
+    ]
+  },
+  {
+    "name": "t:settings.product_cards.name",
+    "settings": [
+      {
+        "type": "select",
+        "id": "card_image_ratio",
+        "label": "t:settings.product_cards.image_ratio",
+        "options": [
+          { "value": "square", "label": "t:settings.product_cards.ratio_square" },
+          { "value": "portrait", "label": "t:settings.product_cards.ratio_portrait" },
+          { "value": "natural", "label": "t:settings.product_cards.ratio_natural" }
+        ],
+        "default": "square"
+      },
+      {
+        "type": "checkbox",
+        "id": "card_show_vendor",
+        "label": "t:settings.product_cards.show_vendor",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "card_show_second_image",
+        "label": "t:settings.product_cards.show_second_image",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "card_show_quick_add",
+        "label": "t:settings.product_cards.show_quick_add",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "t:settings.cart.name",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "cart_drawer_enabled",
+        "label": "t:settings.cart.drawer_enabled",
+        "info": "t:settings.cart.drawer_info",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_show_note",
+        "label": "t:settings.cart.show_note",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "cart_free_shipping_threshold",
+        "label": "t:settings.cart.free_shipping_threshold",
+        "info": "t:settings.cart.free_shipping_info",
+        "default": "50"
+      }
+    ]
+  },
+  {
+    "name": "t:settings.social.name",
+    "settings": [
+      { "type": "url", "id": "social_instagram", "label": "Instagram" },
+      { "type": "url", "id": "social_facebook", "label": "Facebook" },
+      { "type": "url", "id": "social_tiktok", "label": "TikTok" },
+      { "type": "url", "id": "social_youtube", "label": "YouTube" },
+      { "type": "url", "id": "social_pinterest", "label": "Pinterest" }
+    ]
+  },
+  {
+    "name": "t:settings.social_sharing.name",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "share_image",
+        "label": "t:settings.social_sharing.share_image"
+      }
+    ]
+  },
+  {
+    "name": "t:settings.favicon.name",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "t:settings.favicon.favicon",
+        "info": "t:settings.favicon.info"
+      }
+    ]
+  }
+]

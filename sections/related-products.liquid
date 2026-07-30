@@ -1,0 +1,45 @@
+<div class="section section--surface">
+  <div class="page-width">
+    <div class="section-header{% if section.settings.center_heading %} section-header--center{% endif %}">
+      <div class="section-header__text">
+        <h2>{{ section.settings.heading }}</h2>
+      </div>
+    </div>
+
+    {%- liquid
+      assign source_collection = product.collections.first
+      assign shown = 0
+    -%}
+
+    <ul class="product-grid" style="--grid-desktop: {{ section.settings.columns }}">
+      {%- if source_collection != blank -%}
+        {%- for related in source_collection.products -%}
+          {%- if related.id != product.id and shown < section.settings.products_to_show -%}
+            <li>{% render 'product-card', card_product: related %}</li>
+            {%- assign shown = shown | plus: 1 -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endif -%}
+
+      {%- if shown == 0 -%}
+        {%- for related in collections.all.products limit: section.settings.products_to_show -%}
+          {%- unless related.id == product.id -%}
+            <li>{% render 'product-card', card_product: related %}</li>
+          {%- endunless -%}
+        {%- endfor -%}
+      {%- endif -%}
+    </ul>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Related products",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Goes well with" },
+    { "type": "range", "id": "products_to_show", "label": "Products to show", "min": 2, "max": 8, "step": 1, "default": 4 },
+    { "type": "range", "id": "columns", "label": "Columns on desktop", "min": 2, "max": 5, "step": 1, "default": 4 },
+    { "type": "checkbox", "id": "center_heading", "label": "Center heading", "default": true }
+  ]
+}
+{% endschema %}

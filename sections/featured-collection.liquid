@@ -1,0 +1,72 @@
+<div class="section{% if section.settings.surface %} section--surface{% endif %}">
+  <div class="page-width">
+    <div class="section-header{% if section.settings.center_heading %} section-header--center{% endif %}">
+      <div class="section-header__text">
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2>{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.description != blank -%}
+          <p>{{ section.settings.description }}</p>
+        {%- endif -%}
+      </div>
+
+      {%- if section.settings.collection != blank and section.settings.show_view_all -%}
+        <a href="{{ section.settings.collection.url }}" class="link-arrow">
+          View all
+          {% render 'icon', icon: 'arrow-right' %}
+        </a>
+      {%- endif -%}
+    </div>
+
+    <ul class="product-grid" style="--grid-desktop: {{ section.settings.columns }}">
+      {%- if section.settings.collection != blank -%}
+        {%- for product in section.settings.collection.products limit: section.settings.products_to_show -%}
+          <li>{% render 'product-card', card_product: product %}</li>
+        {%- else -%}
+          <li class="text-muted">{{ 'sections.collection_template.empty' | t }}</li>
+        {%- endfor -%}
+      {%- else -%}
+        {%- for i in (1..section.settings.products_to_show) -%}
+          <li>{% render 'product-card' %}</li>
+        {%- endfor -%}
+      {%- endif -%}
+    </ul>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Featured collection",
+  "settings": [
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Bestsellers" },
+    { "type": "textarea", "id": "description", "label": "Description" },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Products to show",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "Columns on desktop",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "default": 4
+    },
+    { "type": "checkbox", "id": "show_view_all", "label": "Show \"View all\" link", "default": true },
+    { "type": "checkbox", "id": "center_heading", "label": "Center heading", "default": false },
+    { "type": "checkbox", "id": "surface", "label": "Tinted background", "default": false }
+  ],
+  "presets": [{ "name": "Featured collection" }]
+}
+{% endschema %}

@@ -1,0 +1,59 @@
+{%- paginate blog.articles by 12 -%}
+  <div class="section">
+    <div class="page-width">
+      <h1>{{ blog.title }}</h1>
+
+      {%- if blog.all_tags.size > 0 -%}
+        <div class="active-facets" style="margin-top:2rem">
+          <a href="{{ blog.url }}" class="active-facet">{{ 'products.facets.clear_all' | t }}</a>
+          {%- for tag in blog.all_tags -%}
+            <a href="{{ blog.url }}/tagged/{{ tag | handle }}" class="active-facet">{{ tag }}</a>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      <div class="article-grid">
+        {%- for article in blog.articles -%}
+          <article class="article-card">
+            <a href="{{ article.url }}" class="article-card__media">
+              {%- if article.image -%}
+                <img
+                  src="{{ article.image | image_url: width: 900 }}"
+                  srcset="{{ article.image | image_url: width: 500 }} 500w, {{ article.image | image_url: width: 900 }} 900w"
+                  sizes="(min-width: 750px) 33vw, 100vw"
+                  alt="{{ article.image.alt | escape }}"
+                  width="{{ article.image.width }}"
+                  height="{{ article.image.height }}"
+                  loading="lazy">
+              {%- else -%}
+                {{ 'blog-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif -%}
+            </a>
+
+            <div class="article-card__body">
+              <div class="article-card__meta">
+                {{ article.published_at | date: format: 'date' }}
+                {%- if article.tags.size > 0 %} · {{ article.tags.first }}{% endif -%}
+              </div>
+              <h2 class="h3"><a href="{{ article.url }}">{{ article.title }}</a></h2>
+              <p class="text-muted">{{ article.excerpt_or_content | strip_html | truncate: 140 }}</p>
+              <a href="{{ article.url }}" class="link-arrow">
+                {{ 'blogs.article.read_more' | t }}
+                {% render 'icon', icon: 'arrow-right' %}
+              </a>
+            </div>
+          </article>
+        {%- endfor -%}
+      </div>
+
+      {% render 'pagination', paginate: paginate %}
+    </div>
+  </div>
+{%- endpaginate -%}
+
+{% schema %}
+{
+  "name": "Blog",
+  "settings": []
+}
+{% endschema %}

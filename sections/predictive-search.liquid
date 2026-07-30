@@ -1,0 +1,32 @@
+{%- comment -%}
+  Rendered on demand by theme.js via the Predictive Search API.
+{%- endcomment -%}
+
+<div class="search-results" data-search-results>
+  {%- if predictive_search.performed -%}
+    {%- if predictive_search.resources.products.size > 0 -%}
+      {%- for product in predictive_search.resources.products -%}
+        <a href="{{ product.url }}" class="search-result">
+          {%- if product.featured_media -%}
+            <img src="{{ product.featured_media | image_url: width: 120 }}" alt="{{ product.featured_media.alt | escape }}" width="60" height="60" loading="lazy">
+          {%- else -%}
+            <span class="search-result__image"></span>
+          {%- endif -%}
+          <span>
+            <span class="search-result__title">{{ product.title | escape }}</span>
+            <span class="search-result__price">{{ product.price | money }}</span>
+          </span>
+        </a>
+      {%- endfor -%}
+    {%- else -%}
+      <p class="text-muted">{{ 'general.search.no_results' | t: terms: predictive_search.terms }}</p>
+    {%- endif -%}
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Predictive search",
+  "settings": []
+}
+{% endschema %}
