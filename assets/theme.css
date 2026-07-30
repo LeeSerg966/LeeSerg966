@@ -45,6 +45,14 @@ a {
   text-underline-offset: 0.25em;
 }
 
+/* Inline icons carry no intrinsic size, so give them a sane default.
+   Every component rule below is more specific and still wins. */
+.icon {
+  width: 2rem;
+  height: 2rem;
+  flex: none;
+}
+
 button {
   font: inherit;
   cursor: pointer;
@@ -1439,8 +1447,14 @@ select {
   gap: clamp(2.4rem, 4vw, 4rem);
   grid-template-columns: 1fr;
 }
+/* auto-fit cannot be mixed with fr tracks — that invalidates the whole
+   declaration and collapses the footer to one column. */
 @media screen and (min-width: 750px) {
-  .footer__grid { grid-template-columns: 1.4fr repeat(auto-fit, minmax(16rem, 1fr)); }
+  .footer__grid { grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr)); }
+}
+
+@media screen and (min-width: 990px) {
+  .footer__brand { padding-right: 4rem; }
 }
 
 .footer__heading {
@@ -2135,4 +2149,46 @@ body.overflow-hidden { overflow: hidden; }
 
 .hero:not(:has(.hero__media)) {
   background: radial-gradient(120% 130% at 12% 0%, var(--color-accent-soft) 0%, var(--color-surface) 58%);
+}
+
+/* ==========================================================================
+   Fixes found by rendering the theme
+   ========================================================================== */
+
+/* Brand mark in the header / footer logo lock-up. */
+.header__logo .icon {
+  width: 2.6rem;
+  height: 2.6rem;
+  color: var(--color-accent);
+}
+
+/* Filter dropdown chevron. */
+.facet summary .icon {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+/* On a photo hero the secondary button has to read against the image. */
+.hero--light .btn--secondary {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.55);
+  background-color: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(2px);
+}
+.hero--light .btn--secondary:hover {
+  color: var(--color-text);
+  background-color: #fff;
+  border-color: #fff;
+}
+
+/* Two tinted sections in a row read as one block with doubled padding. */
+.section--surface + .section--surface {
+  padding-top: 0;
+}
+
+/* Keep the last of the page clear of the mobile buy bar. */
+@media screen and (max-width: 989px) {
+  body:has(.sticky-buy) .footer__bottom {
+    padding-bottom: 8rem;
+  }
 }
