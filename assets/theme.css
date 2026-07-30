@@ -2192,3 +2192,14 @@ body.overflow-hidden { overflow: hidden; }
     padding-bottom: 8rem;
   }
 }
+
+/* "Remove" was a 21px tap target sitting inline next to the quantity stepper. */
+.cart-item__remove {
+  display: inline-flex;
+  align-items: center;
+  min-height: 3.2rem;
+  padding: 0.4rem 0;
+}
+.cart-table .cart-item__remove {
+  display: flex;
+}
