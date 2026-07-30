@@ -28,6 +28,7 @@
         {%- endif -%}
       </div>
 
+      <div id="CollectionResults" data-collection-results>
       {%- if section.settings.enable_filtering or section.settings.enable_sorting -%}
         <form class="collection-toolbar" id="FacetForm">
           {%- if section.settings.enable_filtering -%}
@@ -155,6 +156,7 @@
           <a href="{{ collection.url }}" class="btn btn--secondary">{{ 'products.facets.clear_all' | t }}</a>
         </div>
       {%- endif -%}
+      </div>
     </div>
   </div>
 {%- endpaginate -%}

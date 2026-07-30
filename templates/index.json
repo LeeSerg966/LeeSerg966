@@ -6,7 +6,6 @@
         "height": "large",
         "alignment": "left",
         "text_light": true,
-        "eyebrow": "Loved by 12,000+ pet parents",
         "heading": "Grooming days without the drama",
         "subtitle": "Quiet nail grinders, muddy-paw cleaners and walk-ready gear — made for pets who'd rather be doing anything else.",
         "button_label": "Shop bestsellers",
@@ -19,13 +18,49 @@
     "marquee": {
       "type": "marquee",
       "blocks": {
-        "m1": { "type": "item", "settings": { "text": "Free EU shipping over €50", "icon": "truck" } },
-        "m2": { "type": "item", "settings": { "text": "30-day returns", "icon": "return" } },
-        "m3": { "type": "item", "settings": { "text": "4.8 / 5 from 2,400+ reviews", "icon": "star" } },
-        "m4": { "type": "item", "settings": { "text": "2-year guarantee", "icon": "shield" } },
-        "m5": { "type": "item", "settings": { "text": "Tested on very wriggly dogs", "icon": "paw" } }
+        "m1": {
+          "type": "item",
+          "settings": {
+            "text": "Free EU shipping over €50",
+            "icon": "truck"
+          }
+        },
+        "m2": {
+          "type": "item",
+          "settings": {
+            "text": "30-day returns",
+            "icon": "return"
+          }
+        },
+        "m3": {
+          "type": "item",
+          "settings": {
+            "text": "Vet-approved designs",
+            "icon": "star"
+          }
+        },
+        "m4": {
+          "type": "item",
+          "settings": {
+            "text": "Secure checkout",
+            "icon": "shield"
+          }
+        },
+        "m5": {
+          "type": "item",
+          "settings": {
+            "text": "Tested on very wriggly dogs",
+            "icon": "paw"
+          }
+        }
       },
-      "block_order": ["m1", "m2", "m3", "m4", "m5"],
+      "block_order": [
+        "m1",
+        "m2",
+        "m3",
+        "m4",
+        "m5"
+      ],
       "settings": {}
     },
     "featured": {
@@ -44,11 +79,24 @@
     "categories": {
       "type": "collection-list",
       "blocks": {
-        "c1": { "type": "collection", "settings": {} },
-        "c2": { "type": "collection", "settings": {} },
-        "c3": { "type": "collection", "settings": {} }
+        "c1": {
+          "type": "collection",
+          "settings": {}
+        },
+        "c2": {
+          "type": "collection",
+          "settings": {}
+        },
+        "c3": {
+          "type": "collection",
+          "settings": {}
+        }
       },
-      "block_order": ["c1", "c2", "c3"],
+      "block_order": [
+        "c1",
+        "c2",
+        "c3"
+      ],
       "settings": {
         "heading": "Shop by category",
         "description": "Grooming, walking, travelling — everything sorted by the job it does.",
@@ -95,7 +143,11 @@
           }
         }
       },
-      "block_order": ["p1", "p2", "p3"],
+      "block_order": [
+        "p1",
+        "p2",
+        "p3"
+      ],
       "settings": {
         "eyebrow": "Why it works",
         "heading": "Built for the pets who hate sitting still",
@@ -110,23 +162,47 @@
       "blocks": {
         "v1": {
           "type": "item",
-          "settings": { "icon": "truck", "heading": "Free EU shipping", "text": "On every order over €50, tracked door to door." }
+          "settings": {
+            "icon": "truck",
+            "heading": "Free EU shipping",
+            "text": "On every order over €50, tracked door to door."
+          }
         },
         "v2": {
           "type": "item",
-          "settings": { "icon": "return", "heading": "30-day returns", "text": "Not the right fit? Send it back, no questions asked." }
+          "settings": {
+            "icon": "return",
+            "heading": "30-day returns",
+            "text": "Not the right fit? Send it back, no questions asked."
+          }
         },
         "v3": {
           "type": "item",
-          "settings": { "icon": "shield", "heading": "2-year guarantee", "text": "Every motorised tool is covered for two full years." }
+          "settings": {
+            "icon": "shield",
+            "heading": "2-year guarantee",
+            "text": "Every motorised tool is covered for two full years."
+          }
         },
         "v4": {
           "type": "item",
-          "settings": { "icon": "chat", "heading": "Real humans", "text": "Pet-owning support team, replies within 24 hours." }
+          "settings": {
+            "icon": "chat",
+            "heading": "Real humans",
+            "text": "Pet-owning support team, replies within 24 hours."
+          }
         }
       },
-      "block_order": ["v1", "v2", "v3", "v4"],
-      "settings": { "surface": true, "tight": false }
+      "block_order": [
+        "v1",
+        "v2",
+        "v3",
+        "v4"
+      ],
+      "settings": {
+        "surface": true,
+        "tight": false
+      }
     },
     "testimonials": {
       "type": "testimonials",
@@ -135,33 +211,36 @@
           "type": "testimonial",
           "settings": {
             "rating": 5,
-            "quote": "My spaniel used to hide the second she saw the clippers. With the grinder she just falls asleep on my lap. First time in four years I've done her nails alone.",
-            "author": "Marta K.",
-            "meta": "Berlin · Verified buyer"
+            "quote": "Replace with a real customer review.",
+            "author": "",
+            "meta": ""
           }
         },
         "t2": {
           "type": "testimonial",
           "settings": {
             "rating": 5,
-            "quote": "Two labs, one muddy field, one paw cleaner. My hallway has never survived a winter this well.",
-            "author": "Jonas B.",
-            "meta": "Hamburg · Verified buyer"
+            "quote": "Replace with a real customer review.",
+            "author": "",
+            "meta": ""
           }
         },
         "t3": {
           "type": "testimonial",
           "settings": {
             "rating": 5,
-            "quote": "Ordered Tuesday, arrived Thursday, and support actually answered my sizing question in an hour. Rare these days.",
-            "author": "Sofie D.",
-            "meta": "Vienna · Verified buyer"
+            "quote": "Replace with a real customer review.",
+            "author": "",
+            "meta": ""
           }
         }
       },
-      "block_order": ["t1", "t2", "t3"],
+      "block_order": [
+        "t1",
+        "t2",
+        "t3"
+      ],
       "settings": {
-        "eyebrow": "4.8 / 5 from 2,400+ reviews",
         "heading": "What pet parents say",
         "surface": true
       }
@@ -169,13 +248,37 @@
     "gallery": {
       "type": "gallery",
       "blocks": {
-        "g1": { "type": "image", "settings": { "wide": true, "tall": true } },
-        "g2": { "type": "image", "settings": {} },
-        "g3": { "type": "image", "settings": {} },
-        "g4": { "type": "video", "settings": {} },
-        "g5": { "type": "image", "settings": {} }
+        "g1": {
+          "type": "image",
+          "settings": {
+            "wide": true,
+            "tall": true
+          }
+        },
+        "g2": {
+          "type": "image",
+          "settings": {}
+        },
+        "g3": {
+          "type": "image",
+          "settings": {}
+        },
+        "g4": {
+          "type": "video",
+          "settings": {}
+        },
+        "g5": {
+          "type": "image",
+          "settings": {}
+        }
       },
-      "block_order": ["g1", "g2", "g3", "g4", "g5"],
+      "block_order": [
+        "g1",
+        "g2",
+        "g3",
+        "g4",
+        "g5"
+      ],
       "settings": {
         "eyebrow": "#KesvaroPets",
         "heading": "From our community",
@@ -218,7 +321,12 @@
           }
         }
       },
-      "block_order": ["f1", "f2", "f3", "f4"],
+      "block_order": [
+        "f1",
+        "f2",
+        "f3",
+        "f4"
+      ],
       "settings": {
         "heading": "Questions, answered",
         "button_label": "Contact us",
@@ -230,7 +338,7 @@
       "type": "newsletter",
       "settings": {
         "heading": "10% off your first order",
-        "description": "Join 12,000 pet parents getting care tips, new drops and subscriber-only offers.",
+        "description": "Care tips, new arrivals and subscriber-only offers.",
         "footnote": "No spam. Unsubscribe any time.",
         "surface": true
       }

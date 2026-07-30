@@ -27,11 +27,21 @@
 
     <div class="product" data-product-root>
       {%- comment -%}---------------------------------------------- media {%- endcomment -%}
-      <div class="product__media-wrapper">
-        <ul class="product__media-list product__media-list--{{ section.settings.gallery_layout }}" data-product-media>
+      <div class="product__media-wrapper product__gallery--{{ section.settings.gallery_layout }}">
+        <div class="product__viewer">
+          {%- if product.media.size > 1 -%}
+            <button type="button" class="product__nav product__nav--prev" data-media-nav="prev" aria-label="{{ 'general.accessibility.previous' | t }}">
+              {% render 'icon', icon: 'chevron-left' %}
+            </button>
+            <button type="button" class="product__nav product__nav--next" data-media-nav="next" aria-label="{{ 'general.accessibility.next' | t }}">
+              {% render 'icon', icon: 'chevron-right' %}
+            </button>
+          {%- endif -%}
+
+          <ul class="product__media-list" data-product-media>
           {%- if product.media.size > 0 -%}
             {%- for media in product.media -%}
-              <li class="product__media" data-media-id="{{ media.id }}">
+              <li class="product__media" data-media-id="{{ media.id }}" data-media-index="{{ forloop.index0 }}">
                 {%- case media.media_type -%}
                   {%- when 'image' -%}
                     <button
@@ -75,7 +85,36 @@
               <div class="media media--square">{{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}</div>
             </li>
           {%- endif -%}
-        </ul>
+          </ul>
+        </div>
+
+        {%- if product.media.size > 1 -%}
+          <ul class="product__thumbs" data-product-thumbs>
+            {%- for media in product.media -%}
+              <li>
+                <button
+                  type="button"
+                  class="product__thumb{% if forloop.first %} is-active{% endif %}"
+                  data-media-target="{{ media.id }}"
+                  aria-label="{{ media.media_type }} {{ forloop.index }}">
+                  <img
+                    src="{{ media.preview_image | image_url: width: 200 }}"
+                    alt="{{ media.alt | escape }}"
+                    width="90"
+                    height="90"
+                    loading="lazy">
+                  {%- if media.media_type == 'video' or media.media_type == 'external_video' -%}
+                    <span class="product__thumb-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5Z"/></svg>
+                    </span>
+                  {%- elsif media.media_type == 'model' -%}
+                    <span class="product__thumb-icon product__thumb-icon--text" aria-hidden="true">3D</span>
+                  {%- endif -%}
+                </button>
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
       </div>
 
       {%- comment -%}---------------------------------------------- info {%- endcomment -%}
@@ -136,13 +175,37 @@
               {%- unless product.has_only_default_variant -%}
                 <div {{ block.shopify_attributes }}>
                   {%- for option in product.options_with_values -%}
+                    {%- liquid
+                      assign option_key = option.name | downcase
+                      assign is_swatch = false
+                      if option_key contains 'color' or option_key contains 'colour' or option_key contains 'farbe'
+                        assign is_swatch = true
+                      endif
+                    -%}
+
                     <div class="variant-picker" data-option-index="{{ forloop.index0 }}">
                       <span class="variant-picker__label">
                         {{ option.name }}
+                        <span data-selected-option>{{ option.selected_value }}</span>
                       </span>
-                      <div class="variant-options">
+
+                      <div class="variant-options{% if is_swatch %} variant-options--swatch{% endif %}">
                         {%- for value in option.values -%}
-                          {%- assign input_id = section.id | append: '-' | append: forloop.parentloop.index | append: '-' | append: forloop.index -%}
+                          {%- liquid
+                            assign input_id = section.id | append: '-' | append: forloop.parentloop.index | append: '-' | append: forloop.index
+                            assign swatch_style = ''
+                            if is_swatch
+                              if value.swatch.image != blank
+                                assign swatch_image = value.swatch.image | image_url: width: 100
+                                assign swatch_style = 'background-image:url(' | append: swatch_image | append: ')'
+                              elsif value.swatch.color != blank
+                                assign swatch_style = 'background-color:' | append: value.swatch.color
+                              else
+                                assign fallback = value | downcase | split: ' ' | last | strip
+                                assign swatch_style = 'background-color:' | append: fallback
+                              endif
+                            endif
+                          -%}
                           <div class="variant-option">
                             <input
                               type="radio"
@@ -150,7 +213,14 @@
                               name="{{ option.name }}-{{ section.id }}"
                               value="{{ value | escape }}"
                               {% if option.selected_value == value %}checked{% endif %}>
-                            <label for="{{ input_id }}">{{ value }}</label>
+                            <label for="{{ input_id }}"{% if is_swatch %} class="variant-option__swatch" title="{{ value | escape }}"{% endif %}>
+                              {%- if is_swatch -%}
+                                <span class="variant-option__chip" style="{{ swatch_style }}"></span>
+                                <span class="visually-hidden">{{ value }}</span>
+                              {%- else -%}
+                                {{ value }}
+                              {%- endif -%}
+                            </label>
                           </div>
                         {%- endfor -%}
                       </div>
@@ -278,6 +348,35 @@
   </div>
 </div>
 
+{%- if section.settings.sticky_buy_bar -%}
+  <div class="sticky-buy" data-sticky-buy>
+    <div class="sticky-buy__info">
+      {%- if product.featured_media -%}
+        <img
+          src="{{ product.featured_media | image_url: width: 120 }}"
+          alt=""
+          width="48"
+          height="48"
+          loading="lazy">
+      {%- endif -%}
+      <div class="sticky-buy__text">
+        <span class="sticky-buy__title">{{ product.title | truncate: 42 | escape }}</span>
+        <span data-price-target>{% render 'price', product: product, use_variant: true %}</span>
+      </div>
+    </div>
+
+    <button type="button" class="btn" data-sticky-submit {% unless current_variant.available %}disabled{% endunless %}>
+      <span class="btn__text">
+        {%- if current_variant.available -%}
+          {{ 'products.product.add_to_cart' | t }}
+        {%- else -%}
+          {{ 'products.product.sold_out' | t }}
+        {%- endif -%}
+      </span>
+    </button>
+  </div>
+{%- endif -%}
+
 {%- if has_model -%}
   <script src="{{ 'model-viewer-ui.js' | shopify_asset_url }}" defer></script>
 {%- endif -%}
@@ -319,10 +418,16 @@
       "id": "gallery_layout",
       "label": "Gallery layout on desktop",
       "options": [
-        { "value": "stacked", "label": "Stacked" },
-        { "value": "grid", "label": "Grid" }
+        { "value": "thumbnails", "label": "Large image with thumbnails" },
+        { "value": "stacked", "label": "Stacked images" }
       ],
-      "default": "grid"
+      "default": "thumbnails"
+    },
+    {
+      "type": "checkbox",
+      "id": "sticky_buy_bar",
+      "label": "Sticky buy bar on mobile",
+      "default": true
     }
   ],
   "blocks": [
@@ -334,7 +439,7 @@
       "limit": 1,
       "settings": [
         { "type": "range", "id": "stars", "label": "Stars", "min": 1, "max": 5, "step": 1, "default": 5 },
-        { "type": "text", "id": "text", "label": "Text", "default": "4.8 · 2,412 reviews" }
+        { "type": "text", "id": "text", "label": "Text" }
       ]
     },
     {

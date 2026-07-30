@@ -276,6 +276,106 @@
     });
   });
 
+  /* -------------------------------------------------------- product gallery */
+
+  var galleryList = document.querySelector('[data-product-media]');
+
+  function setActiveThumb(mediaId) {
+    document.querySelectorAll('[data-media-target]').forEach(function (thumb) {
+      thumb.classList.toggle('is-active', thumb.getAttribute('data-media-target') === String(mediaId));
+    });
+  }
+
+  function showMedia(slide) {
+    if (!slide) return;
+
+    if (galleryList && galleryList.scrollWidth > galleryList.clientWidth + 4) {
+      galleryList.scrollTo({ left: slide.offsetLeft - galleryList.offsetLeft, behavior: 'smooth' });
+    } else {
+      slide.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    setActiveThumb(slide.getAttribute('data-media-id'));
+  }
+
+  if (galleryList) {
+    var slides = Array.prototype.slice.call(galleryList.querySelectorAll('.product__media'));
+
+    document.addEventListener('click', function (event) {
+      var thumb = event.target.closest('[data-media-target]');
+      if (thumb) {
+        event.preventDefault();
+        showMedia(galleryList.querySelector('[data-media-id="' + thumb.getAttribute('data-media-target') + '"]'));
+        return;
+      }
+
+      var nav = event.target.closest('[data-media-nav]');
+      if (!nav) return;
+
+      var active = slides.findIndex(function (slide) {
+        return slide.querySelector('[data-media-target].is-active') || slide.classList.contains('is-current');
+      });
+      if (active < 0) {
+        active = slides.findIndex(function (slide) {
+          return Math.abs(slide.offsetLeft - galleryList.offsetLeft - galleryList.scrollLeft) < 8;
+        });
+      }
+      if (active < 0) active = 0;
+
+      var next = nav.getAttribute('data-media-nav') === 'next' ? active + 1 : active - 1;
+      if (next < 0) next = slides.length - 1;
+      if (next >= slides.length) next = 0;
+      showMedia(slides[next]);
+    });
+
+    if ('IntersectionObserver' in window && slides.length > 1) {
+      var observer = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            slides.forEach(function (slide) { slide.classList.remove('is-current'); });
+            entry.target.classList.add('is-current');
+            setActiveThumb(entry.target.getAttribute('data-media-id'));
+          });
+        },
+        { root: galleryList, threshold: 0.6 }
+      );
+      slides.forEach(function (slide) { observer.observe(slide); });
+    }
+  }
+
+  /* --------------------------------------------------------- sticky buy bar */
+
+  var stickyBar = document.querySelector('[data-sticky-buy]');
+  if (stickyBar) {
+    var mainSubmit = document.querySelector('[data-submit]');
+    var stickyButton = stickyBar.querySelector('[data-sticky-submit]');
+
+    if (stickyButton && mainSubmit) {
+      stickyButton.addEventListener('click', function () {
+        var form = mainSubmit.closest('form');
+        if (!form) return;
+        if (typeof form.requestSubmit === 'function') {
+          form.requestSubmit(mainSubmit);
+        } else {
+          mainSubmit.click();
+        }
+      });
+    }
+
+    if (mainSubmit && 'IntersectionObserver' in window) {
+      new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            var scrolledPast = !entry.isIntersecting && entry.boundingClientRect.top < 0;
+            stickyBar.classList.toggle('is-visible', scrolledPast);
+          });
+        },
+        { threshold: 0 }
+      ).observe(mainSubmit);
+    }
+  }
+
   /* --------------------------------------------------------- variant picker */
 
   function ProductForm(root) {
@@ -284,9 +384,11 @@
 
     var variants = JSON.parse(variantsScript.textContent);
     var idInput = root.querySelector('[name="id"]');
-    var priceTarget = root.querySelector('[data-price-target]');
+    var priceTargets = document.querySelectorAll('[data-price-target]');
     var submit = root.querySelector('[data-submit]');
     var submitText = submit ? submit.querySelector('.btn__text') : null;
+    var stickySubmit = document.querySelector('[data-sticky-submit]');
+    var stickyText = stickySubmit ? stickySubmit.querySelector('.btn__text') : null;
     var stock = root.querySelector('[data-stock]');
     var sku = root.querySelector('[data-sku]');
     var mediaList = document.querySelector('[data-product-media]');
@@ -328,10 +430,15 @@
       if (!mediaList || !variant || !variant.featured_media) return;
       var target = mediaList.querySelector('[data-media-id="' + variant.featured_media.id + '"]');
       if (!target) return;
-      mediaList.prepend(target);
-      if (window.matchMedia('(max-width: 989px)').matches) {
-        target.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }
+      showMedia(target);
+    }
+
+    function updateSelectedLabels() {
+      root.querySelectorAll('[data-option-index]').forEach(function (group) {
+        var checked = group.querySelector('input:checked');
+        var label = group.querySelector('[data-selected-option]');
+        if (label && checked) label.textContent = checked.value;
+      });
     }
 
     function update() {
@@ -339,22 +446,29 @@
       var variant = findVariant(options);
 
       updateAvailability(options);
+      updateSelectedLabels();
 
       if (!variant) {
         if (submit) {
           submit.disabled = true;
           if (submitText) submitText.textContent = strings.unavailable || 'Unavailable';
         }
+        if (stickySubmit) {
+          stickySubmit.disabled = true;
+          if (stickyText) stickyText.textContent = strings.unavailable || 'Unavailable';
+        }
         return;
       }
 
       if (idInput) idInput.value = variant.id;
 
-      if (priceTarget && variant.price_html) {
-        priceTarget.innerHTML = variant.price_html;
-      } else if (priceTarget) {
-        priceTarget.textContent = formatMoney(variant.price);
-      }
+      priceTargets.forEach(function (target) {
+        if (variant.price_html) {
+          target.innerHTML = variant.price_html;
+        } else {
+          target.textContent = formatMoney(variant.price);
+        }
+      });
 
       if (sku) sku.textContent = variant.sku || '';
 
@@ -362,6 +476,13 @@
         submit.disabled = !variant.available;
         if (submitText) {
           submitText.textContent = variant.available ? strings.addToCart : strings.soldOut;
+        }
+      }
+
+      if (stickySubmit) {
+        stickySubmit.disabled = !variant.available;
+        if (stickyText) {
+          stickyText.textContent = variant.available ? strings.addToCart : strings.soldOut;
         }
       }
 
@@ -469,11 +590,81 @@
 
   /* ------------------------------------------------------------ sort / filters */
 
-  document.querySelectorAll('[data-auto-submit]').forEach(function (el) {
-    el.addEventListener('change', function () {
-      var form = el.closest('form');
-      if (form) form.submit();
+  function collectionRegion() {
+    return document.querySelector('[data-collection-results]');
+  }
+
+  function renderCollection(url, push) {
+    var region = collectionRegion();
+    if (!region) {
+      window.location.href = url;
+      return;
+    }
+
+    region.classList.add('is-loading');
+
+    fetch(url)
+      .then(function (response) { return response.text(); })
+      .then(function (html) {
+        var parsed = new DOMParser().parseFromString(html, 'text/html');
+        var fresh = parsed.querySelector('[data-collection-results]');
+        if (fresh) region.innerHTML = fresh.innerHTML;
+        if (push !== false) window.history.pushState({ collection: true }, '', url);
+
+        var top = region.getBoundingClientRect().top + window.scrollY - 90;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      })
+      .catch(function () { window.location.href = url; })
+      .finally(function () { region.classList.remove('is-loading'); });
+  }
+
+  function facetUrl(form) {
+    var params = new URLSearchParams();
+
+    new FormData(form).forEach(function (value, key) {
+      if (String(value).trim() === '') return;
+      params.append(key, value);
     });
+
+    var query = params.toString();
+    return window.location.pathname + (query ? '?' + query : '');
+  }
+
+  // Delegated so the handlers survive an AJAX re-render of the results region.
+  document.addEventListener('change', function (event) {
+    var el = event.target.closest('[data-auto-submit]');
+    if (!el) return;
+
+    var form = el.closest('form');
+    if (!form) return;
+
+    if (form.id === 'FacetForm' && collectionRegion()) {
+      renderCollection(facetUrl(form));
+    } else {
+      form.submit();
+    }
+  });
+
+  document.addEventListener('submit', function (event) {
+    var form = event.target;
+    if (form.id !== 'FacetForm' || !collectionRegion()) return;
+    event.preventDefault();
+    renderCollection(facetUrl(form));
+  });
+
+  document.addEventListener('click', function (event) {
+    var region = collectionRegion();
+    if (!region) return;
+
+    var link = event.target.closest('.pagination a, .active-facet');
+    if (!link || !region.contains(link)) return;
+
+    event.preventDefault();
+    renderCollection(link.href);
+  });
+
+  window.addEventListener('popstate', function () {
+    if (collectionRegion()) renderCollection(window.location.href, false);
   });
 
   /* ----------------------------------------------------------- address forms */

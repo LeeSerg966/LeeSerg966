@@ -5,7 +5,7 @@
       "blocks": {
         "vendor": { "type": "vendor", "settings": {} },
         "title": { "type": "title", "settings": {} },
-        "rating": { "type": "rating", "settings": { "stars": 5, "text": "4.8 · 2,412 reviews" } },
+        "rating": { "type": "rating", "settings": { "stars": 5, "text": "" } },
         "price": { "type": "price", "settings": { "show_taxes_note": true } },
         "stock": { "type": "stock", "settings": {} },
         "variant_picker": { "type": "variant_picker", "settings": {} },
@@ -42,7 +42,7 @@
         "share"
       ],
       "settings": {
-        "gallery_layout": "grid"
+        "gallery_layout": "thumbnails"
       }
     },
     "related": {
