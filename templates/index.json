@@ -342,11 +342,22 @@
         "footnote": "No spam. Unsubscribe any time.",
         "surface": true
       }
+    },
+    "promo-banner": {
+      "type": "promo-banner",
+      "settings": {
+        "eyebrow": "Limited time",
+        "heading": "Buy any 2 items, pick a free gift",
+        "text": "Add two products to your cart and choose your gift right there — no code needed.",
+        "button_label": "Shop now",
+        "small_print": "One gift per order. The gift is added at no charge while your cart has two or more items."
+      }
     }
   },
   "order": [
     "hero",
     "marquee",
+    "promo-banner",
     "featured",
     "categories",
     "video",

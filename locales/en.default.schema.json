@@ -57,6 +57,14 @@
       "name": "Favicon",
       "favicon": "Favicon image",
       "info": "Will be scaled down to 32 x 32px"
+    },
+    "gift": {
+      "name": "Free gift",
+      "enabled": "Enable the free-gift picker",
+      "enabled_info": "Shows a gift chooser in the cart once the customer reaches the item threshold. Create a matching \"Buy X get Y\" automatic discount in Discounts, or the gift will not be free.",
+      "collection": "Gift collection",
+      "collection_info": "Products customers can choose from.",
+      "threshold": "Items needed to unlock"
     }
   }
 }

@@ -1,0 +1,90 @@
+{%- comment -%}
+  The gift chooser itself. Rendered once from the layout so it is not
+  duplicated when the cart drawer re-renders. Each variant is its own tile,
+  which avoids a second variant picker inside a modal.
+{%- endcomment -%}
+
+{%- liquid
+  assign gift_collection = settings.gift_collection
+
+  assign chosen_variant_id = 0
+  for item in cart.items
+    for property in item.properties
+      if property.first == '_gift'
+        assign chosen_variant_id = item.variant_id
+      endif
+    endfor
+  endfor
+-%}
+
+{%- if settings.gift_enabled and gift_collection != blank and gift_collection.products.size > 0 -%}
+  <div class="panel gift-panel" id="GiftPicker" aria-hidden="true" role="dialog" aria-modal="true" aria-label="{{ 'gift.panel_title' | t }}">
+    <div class="panel__overlay" data-panel-close></div>
+
+    <div class="panel__content">
+      <div class="panel__header">
+        <h2>{{ 'gift.panel_title' | t }}</h2>
+        <button type="button" class="panel__close" data-panel-close aria-label="{{ 'general.accessibility.close' | t }}" data-panel-focus>
+          {% render 'icon', icon: 'close' %}
+        </button>
+      </div>
+
+      <div class="panel__body">
+        <p class="gift-panel__intro">{{ 'gift.panel_intro' | t }}</p>
+
+        <ul class="gift-grid">
+          {%- for gift in gift_collection.products -%}
+            {%- for variant in gift.variants -%}
+              {%- liquid
+                assign tile_image = variant.image | default: gift.featured_image
+                assign is_chosen = false
+                if variant.id == chosen_variant_id
+                  assign is_chosen = true
+                endif
+              -%}
+              <li>
+                <button
+                  type="button"
+                  class="gift-card{% if is_chosen %} is-chosen{% endif %}"
+                  data-gift-add="{{ variant.id }}"
+                  {% unless variant.available %}disabled{% endunless %}>
+                  <span class="gift-card__media">
+                    {%- if tile_image -%}
+                      <img
+                        src="{{ tile_image | image_url: width: 300 }}"
+                        alt="{{ gift.title | escape }}"
+                        width="120"
+                        height="120"
+                        loading="lazy">
+                    {%- endif -%}
+                  </span>
+
+                  <span class="gift-card__text">
+                    <span class="gift-card__title">{{ gift.title | escape }}</span>
+                    {%- unless gift.has_only_default_variant -%}
+                      <span class="gift-card__variant">{{ variant.title }}</span>
+                    {%- endunless -%}
+                    <span class="gift-card__price">
+                      <span class="gift-card__free">{{ 'gift.free' | t }}</span>
+                      <s>{{ variant.price | money }}</s>
+                    </span>
+                  </span>
+
+                  <span class="gift-card__state" aria-hidden="true">
+                    {%- if is_chosen -%}
+                      {% render 'icon', icon: 'check' %}
+                    {%- else -%}
+                      {% render 'icon', icon: 'chevron-right' %}
+                    {%- endif -%}
+                  </span>
+                </button>
+              </li>
+            {%- endfor -%}
+          {%- endfor -%}
+        </ul>
+
+        <p class="gift-panel__note">{{ 'gift.panel_note' | t }}</p>
+      </div>
+    </div>
+  </div>
+{%- endif -%}

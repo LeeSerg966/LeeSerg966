@@ -1,0 +1,56 @@
+<div class="section section--tight">
+  <div class="page-width">
+    <div class="promo-banner">
+      <div class="promo-banner__icon" aria-hidden="true">
+        {% render 'icon', icon: 'gift' %}
+      </div>
+
+      <div class="promo-banner__text">
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="promo-banner__eyebrow">{{ section.settings.eyebrow }}</span>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="promo-banner__heading">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <p class="promo-banner__sub">{{ section.settings.text }}</p>
+        {%- endif -%}
+      </div>
+
+      {%- if section.settings.button_label != blank -%}
+        <a href="{{ section.settings.button_link | default: routes.all_products_collection_url }}" class="btn promo-banner__btn">
+          {{ section.settings.button_label }}
+        </a>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.small_print != blank -%}
+      <p class="promo-banner__smallprint">{{ section.settings.small_print }}</p>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Promo banner",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Limited time" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Buy any 2 items, pick a free gift" },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Text",
+      "default": "Add two products to your cart and choose your gift right there — no code needed."
+    },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop now" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    {
+      "type": "text",
+      "id": "small_print",
+      "label": "Small print",
+      "default": "One gift per order. Gift is added at no charge when your cart has two or more items."
+    }
+  ],
+  "presets": [{ "name": "Promo banner" }]
+}
+{% endschema %}

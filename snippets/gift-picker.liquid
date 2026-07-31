@@ -1,0 +1,91 @@
+{%- comment -%}
+  Free-gift status block. Rendered inside the cart drawer and the cart page.
+
+  Three states:
+    locked   — not enough qualifying items yet, shows a progress bar
+    ready    — threshold reached, shows the "pick your gift" button
+    chosen   — a gift is already in the cart, shows it with a "change" link
+
+  Gift lines are marked with the `_gift` line item property, so they never
+  count toward the threshold that unlocked them.
+{%- endcomment -%}
+
+{%- liquid
+  assign gift_collection = settings.gift_collection
+  assign threshold = settings.gift_threshold
+
+  assign eligible_count = 0
+  assign gift_item = nil
+
+  for item in cart.items
+    assign is_gift = false
+    for property in item.properties
+      if property.first == '_gift'
+        assign is_gift = true
+      endif
+    endfor
+
+    if is_gift
+      assign gift_item = item
+    else
+      assign eligible_count = eligible_count | plus: item.quantity
+    endif
+  endfor
+
+  assign remaining = threshold | minus: eligible_count
+  assign percent = eligible_count | times: 100 | divided_by: threshold
+  if percent > 100
+    assign percent = 100
+  endif
+-%}
+
+{%- if settings.gift_enabled and gift_collection != blank and gift_collection.products.size > 0 -%}
+  <div class="gift-picker" data-gift-picker data-gift-threshold="{{ threshold }}">
+    {%- if gift_item -%}
+      <div class="gift-picker__chosen">
+        {%- if gift_item.image -%}
+          <img
+            src="{{ gift_item.image | image_url: width: 160 }}"
+            alt="{{ gift_item.title | escape }}"
+            width="56"
+            height="56"
+            loading="lazy">
+        {%- endif -%}
+
+        <div class="gift-picker__chosen-text">
+          <span class="gift-picker__label">{{ 'gift.chosen_label' | t }}</span>
+          <span class="gift-picker__title">{{ gift_item.product.title | escape }}</span>
+          {%- unless gift_item.product.has_only_default_variant -%}
+            <span class="gift-picker__variant">{{ gift_item.variant.title }}</span>
+          {%- endunless -%}
+        </div>
+
+        <button type="button" class="gift-picker__change" data-panel-open="GiftPicker">
+          {{ 'gift.change' | t }}
+        </button>
+      </div>
+
+    {%- elsif remaining <= 0 -%}
+      <button type="button" class="gift-picker__cta" data-panel-open="GiftPicker">
+        {% render 'icon', icon: 'gift' %}
+        <span>{{ 'gift.pick_cta' | t }}</span>
+        {% render 'icon', icon: 'chevron-right' %}
+      </button>
+
+    {%- else -%}
+      <div class="gift-picker__progress">
+        <p class="gift-picker__progress-text">
+          {% render 'icon', icon: 'gift' %}
+          {%- if remaining == 1 -%}
+            {{ 'gift.locked_one' | t }}
+          {%- else -%}
+            {{ 'gift.locked_other' | t: count: remaining }}
+          {%- endif -%}
+        </p>
+        <div class="shipping-bar__track">
+          <div class="shipping-bar__fill" style="width: {{ percent }}%"></div>
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+{%- endif -%}

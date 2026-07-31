@@ -131,9 +131,18 @@
         "id": "button_style",
         "label": "t:settings.layout.button_style",
         "options": [
-          { "value": "rounded", "label": "t:settings.layout.button_rounded" },
-          { "value": "pill", "label": "t:settings.layout.button_pill" },
-          { "value": "square", "label": "t:settings.layout.button_square" }
+          {
+            "value": "rounded",
+            "label": "t:settings.layout.button_rounded"
+          },
+          {
+            "value": "pill",
+            "label": "t:settings.layout.button_pill"
+          },
+          {
+            "value": "square",
+            "label": "t:settings.layout.button_square"
+          }
         ],
         "default": "pill"
       }
@@ -147,9 +156,18 @@
         "id": "card_image_ratio",
         "label": "t:settings.product_cards.image_ratio",
         "options": [
-          { "value": "square", "label": "t:settings.product_cards.ratio_square" },
-          { "value": "portrait", "label": "t:settings.product_cards.ratio_portrait" },
-          { "value": "natural", "label": "t:settings.product_cards.ratio_natural" }
+          {
+            "value": "square",
+            "label": "t:settings.product_cards.ratio_square"
+          },
+          {
+            "value": "portrait",
+            "label": "t:settings.product_cards.ratio_portrait"
+          },
+          {
+            "value": "natural",
+            "label": "t:settings.product_cards.ratio_natural"
+          }
         ],
         "default": "square"
       },
@@ -199,13 +217,60 @@
     ]
   },
   {
+    "name": "t:settings.gift.name",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "gift_enabled",
+        "label": "t:settings.gift.enabled",
+        "info": "t:settings.gift.enabled_info",
+        "default": true
+      },
+      {
+        "type": "collection",
+        "id": "gift_collection",
+        "label": "t:settings.gift.collection",
+        "info": "t:settings.gift.collection_info"
+      },
+      {
+        "type": "range",
+        "id": "gift_threshold",
+        "label": "t:settings.gift.threshold",
+        "min": 1,
+        "max": 6,
+        "step": 1,
+        "default": 2
+      }
+    ]
+  },
+  {
     "name": "t:settings.social.name",
     "settings": [
-      { "type": "url", "id": "social_instagram", "label": "Instagram" },
-      { "type": "url", "id": "social_facebook", "label": "Facebook" },
-      { "type": "url", "id": "social_tiktok", "label": "TikTok" },
-      { "type": "url", "id": "social_youtube", "label": "YouTube" },
-      { "type": "url", "id": "social_pinterest", "label": "Pinterest" }
+      {
+        "type": "url",
+        "id": "social_instagram",
+        "label": "Instagram"
+      },
+      {
+        "type": "url",
+        "id": "social_facebook",
+        "label": "Facebook"
+      },
+      {
+        "type": "url",
+        "id": "social_tiktok",
+        "label": "TikTok"
+      },
+      {
+        "type": "url",
+        "id": "social_youtube",
+        "label": "YouTube"
+      },
+      {
+        "type": "url",
+        "id": "social_pinterest",
+        "label": "Pinterest"
+      }
     ]
   },
   {

@@ -38,9 +38,16 @@
             "settings": {
               "text": "30-day returns, no questions asked"
             }
+          },
+          "a3": {
+            "type": "announcement",
+            "settings": {
+              "text": "Buy any 2 items and pick a free gift at checkout"
+            }
           }
         },
         "block_order": [
+          "a3",
           "a1",
           "a2"
         ],
@@ -96,7 +103,10 @@
         "settings": {}
       }
     },
-    "content_for_index": []
+    "content_for_index": [],
+    "gift_enabled": true,
+    "gift_collection": "free-gifts",
+    "gift_threshold": 2
   },
   "platform_customizations": {}
 }

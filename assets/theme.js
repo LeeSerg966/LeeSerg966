@@ -804,3 +804,151 @@
     if (event.key === 'Escape') close();
   });
 })();
+
+/* ==========================================================================
+   Free gift: buy N items, pick one gift at no charge
+   ========================================================================== */
+
+(function () {
+  'use strict';
+
+  var settings = window.themeSettings || {};
+  var routes = settings.routes || {};
+  if (!settings.giftEnabled) return;
+
+  var threshold = Number(settings.giftThreshold) || 2;
+  var GIFT_PROPERTY = '_gift';
+  var busy = false;
+
+  function isGiftLine(item) {
+    return !!(item.properties && item.properties[GIFT_PROPERTY]);
+  }
+
+  function eligibleCount(cart) {
+    return cart.items.reduce(function (total, item) {
+      return isGiftLine(item) ? total : total + item.quantity;
+    }, 0);
+  }
+
+  function giftLineNumber(cart) {
+    for (var i = 0; i < cart.items.length; i++) {
+      if (isGiftLine(cart.items[i])) return i + 1;
+    }
+    return 0;
+  }
+
+  function post(url, payload) {
+    return fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(payload)
+    }).then(function (response) {
+      return response.json().then(function (data) {
+        if (!response.ok) throw new Error(data.description || data.message || 'Request failed');
+        return data;
+      });
+    });
+  }
+
+  function getCart() {
+    return fetch((routes.cart || '/cart') + '.js').then(function (r) { return r.json(); });
+  }
+
+  function refreshDrawer() {
+    var drawer = document.getElementById('CartDrawer');
+    if (!drawer) {
+      window.location.reload();
+      return Promise.resolve();
+    }
+    return fetch(routes.cart + '?section_id=cart-drawer')
+      .then(function (r) { return r.text(); })
+      .then(function (html) {
+        var parsed = new DOMParser().parseFromString(html, 'text/html');
+        var fresh = parsed.querySelector('[data-cart-drawer-body]');
+        var target = drawer.querySelector('[data-cart-drawer-body]');
+        if (fresh && target) target.innerHTML = fresh.innerHTML;
+      });
+  }
+
+  function markChosen(variantId) {
+    document.querySelectorAll('[data-gift-add]').forEach(function (card) {
+      card.classList.toggle('is-chosen', card.getAttribute('data-gift-add') === String(variantId));
+    });
+  }
+
+  /* ------------------------------------------------------- choosing a gift */
+
+  document.addEventListener('click', function (event) {
+    var button = event.target.closest('[data-gift-add]');
+    if (!button || busy) return;
+
+    event.preventDefault();
+    busy = true;
+    button.classList.add('is-loading');
+
+    var variantId = Number(button.getAttribute('data-gift-add'));
+
+    getCart()
+      .then(function (cart) {
+        // Only one gift at a time — drop the previous choice first.
+        var line = giftLineNumber(cart);
+        if (!line) return null;
+        return post(routes.cartChange || '/cart/change.js', { line: line, quantity: 0 });
+      })
+      .then(function () {
+        var payload = { items: [{ id: variantId, quantity: 1, properties: {} }] };
+        payload.items[0].properties[GIFT_PROPERTY] = 'Buy 2, get a free gift';
+        return post(routes.cartAdd || '/cart/add.js', payload);
+      })
+      .then(function () {
+        markChosen(variantId);
+        return refreshDrawer();
+      })
+      .then(function () {
+        var panel = document.getElementById('GiftPicker');
+        if (panel) panel.classList.remove('is-open');
+        var drawer = document.getElementById('CartDrawer');
+        if (drawer && !drawer.classList.contains('is-open')) {
+          drawer.classList.add('is-open');
+          drawer.setAttribute('aria-hidden', 'false');
+        }
+      })
+      .catch(function (error) {
+        console.error(error);
+      })
+      .finally(function () {
+        button.classList.remove('is-loading');
+        busy = false;
+      });
+  });
+
+  /* ------------------------------- drop the gift when the cart stops qualifying */
+
+  function enforce() {
+    if (busy) return;
+
+    getCart().then(function (cart) {
+      var line = giftLineNumber(cart);
+      if (!line) return;
+      if (eligibleCount(cart) >= threshold) return;
+
+      busy = true;
+      post(routes.cartChange || '/cart/change.js', { line: line, quantity: 0 })
+        .then(refreshDrawer)
+        .catch(function (error) { console.error(error); })
+        .finally(function () { busy = false; });
+    });
+  }
+
+  // The cart drawer re-renders on every change; watch it and re-check.
+  var drawerNode = document.getElementById('CartDrawer');
+  if (drawerNode && 'MutationObserver' in window) {
+    var debounce;
+    new MutationObserver(function () {
+      clearTimeout(debounce);
+      debounce = setTimeout(enforce, 350);
+    }).observe(drawerNode, { childList: true, subtree: true });
+  }
+
+  document.addEventListener('DOMContentLoaded', enforce);
+})();

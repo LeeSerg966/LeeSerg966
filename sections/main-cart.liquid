@@ -12,6 +12,7 @@
     {%- else -%}
       <form action="{{ routes.cart_url }}" method="post" novalidate>
         {% render 'free-shipping-bar' %}
+        {% render 'gift-picker' %}
 
         <table class="cart-table">
           <thead>

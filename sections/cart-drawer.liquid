@@ -29,6 +29,7 @@
     {%- else -%}
       <div class="panel__body">
         {% render 'free-shipping-bar' %}
+        {% render 'gift-picker' %}
 
         <ul class="cart-items">
           {%- for item in cart.items -%}

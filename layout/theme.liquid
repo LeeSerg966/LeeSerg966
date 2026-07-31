@@ -84,6 +84,8 @@
       };
       window.themeSettings = {
         cartDrawer: {{ settings.cart_drawer_enabled | json }},
+        giftEnabled: {{ settings.gift_enabled | json }},
+        giftThreshold: {{ settings.gift_threshold | default: 2 | json }},
         moneyFormat: {{ shop.money_format | json }},
         routes: {
           cart: {{ routes.cart_url | json }},
@@ -116,6 +118,8 @@
     {%- if settings.cart_drawer_enabled -%}
       {% section 'cart-drawer' %}
     {%- endif -%}
+
+    {% render 'gift-panel' %}
 
     <div class="toast" id="ThemeToast" role="status" aria-live="polite" hidden></div>
 

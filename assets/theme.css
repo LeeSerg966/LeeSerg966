@@ -2203,3 +2203,217 @@ body.overflow-hidden { overflow: hidden; }
 .cart-table .cart-item__remove {
   display: flex;
 }
+
+/* ==========================================================================
+   Free gift
+   ========================================================================== */
+
+.gift-picker {
+  margin-bottom: 2rem;
+  padding: 1.4rem 1.6rem;
+  border: 1px dashed var(--color-accent);
+  border-radius: var(--radius);
+  background: var(--color-accent-soft);
+}
+
+.gift-picker__progress-text {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin: 0 0 1rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--color-accent-dark);
+}
+.gift-picker__progress-text .icon { width: 1.8rem; height: 1.8rem; }
+
+.gift-picker__cta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--color-accent-dark);
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: left;
+}
+.gift-picker__cta span { flex: 1; }
+.gift-picker__cta .icon { width: 2rem; height: 2rem; }
+.gift-picker__cta:hover { color: var(--color-text); }
+
+.gift-picker__chosen {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+.gift-picker__chosen img {
+  width: 5.6rem;
+  height: 5.6rem;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  background: var(--color-background);
+}
+.gift-picker__chosen-text { flex: 1; min-width: 0; }
+.gift-picker__label {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent-dark);
+}
+.gift-picker__title {
+  display: block;
+  font-size: 1.4rem;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.gift-picker__variant { font-size: 1.3rem; color: var(--color-text-muted); }
+.gift-picker__change {
+  flex: none;
+  border: 0;
+  background: none;
+  padding: 0.6rem 0;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--color-accent-dark);
+  text-decoration: underline;
+}
+
+/* Gift chooser panel ------------------------------------------------------- */
+
+.gift-panel { z-index: 70; }
+.gift-panel .panel__content { width: min(52rem, 100%); }
+.gift-panel__intro { font-size: 1.4rem; color: var(--color-text-muted); margin-bottom: 2rem; }
+.gift-panel__note {
+  margin-top: 2rem;
+  font-size: 1.2rem;
+  color: var(--color-text-muted);
+}
+
+.gift-grid {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.gift-card {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-background);
+  text-align: left;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+.gift-card:hover:not(:disabled) { border-color: var(--color-accent); }
+.gift-card:disabled { opacity: 0.45; cursor: not-allowed; }
+.gift-card.is-chosen {
+  border-color: var(--color-accent);
+  background: var(--color-accent-soft);
+}
+.gift-card.is-loading { opacity: 0.6; pointer-events: none; }
+
+.gift-card__media {
+  flex: none;
+  width: 6.4rem;
+  height: 6.4rem;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--color-surface);
+}
+.gift-card__media img { width: 100%; height: 100%; object-fit: cover; }
+
+.gift-card__text { flex: 1; min-width: 0; }
+.gift-card__title {
+  display: block;
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+.gift-card__variant {
+  display: block;
+  font-size: 1.3rem;
+  color: var(--color-text-muted);
+}
+.gift-card__price {
+  display: flex;
+  align-items: baseline;
+  gap: 0.8rem;
+  margin-top: 0.4rem;
+  font-size: 1.3rem;
+}
+.gift-card__free {
+  font-weight: 700;
+  color: var(--color-accent-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.gift-card__price s { color: var(--color-text-muted); }
+
+.gift-card__state { flex: none; color: var(--color-text-muted); }
+.gift-card.is-chosen .gift-card__state { color: var(--color-accent); }
+.gift-card__state .icon { width: 2rem; height: 2rem; }
+
+/* Promo banner ------------------------------------------------------------- */
+
+.promo-banner {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.6rem, 3vw, 2.8rem);
+  padding: clamp(1.8rem, 3vw, 2.8rem);
+  border-radius: var(--radius);
+  background: var(--color-accent-soft);
+  border: 1px dashed var(--color-accent);
+}
+
+@media screen and (max-width: 749px) {
+  .promo-banner { flex-direction: column; text-align: center; }
+}
+
+.promo-banner__icon {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 5.6rem;
+  height: 5.6rem;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: var(--color-accent-text);
+}
+.promo-banner__icon .icon { width: 2.8rem; height: 2.8rem; }
+
+.promo-banner__text { flex: 1; }
+.promo-banner__eyebrow {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-accent-dark);
+  margin-bottom: 0.4rem;
+}
+.promo-banner__heading {
+  margin: 0 0 0.4rem;
+  font-size: calc(clamp(2rem, 1.4rem + 1.2vw, 2.8rem) * var(--font-heading-scale));
+}
+.promo-banner__sub { margin: 0; font-size: 1.5rem; color: var(--color-text-muted); }
+.promo-banner__btn { flex: none; }
+
+.promo-banner__smallprint {
+  margin: 1.2rem 0 0;
+  font-size: 1.2rem;
+  color: var(--color-text-muted);
+  text-align: center;
+}

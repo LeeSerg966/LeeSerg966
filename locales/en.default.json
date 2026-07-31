@@ -281,5 +281,16 @@
     "links": {
       "powered_by_shopify": "Powered by Shopify"
     }
+  },
+  "gift": {
+    "chosen_label": "Your free gift",
+    "change": "Change",
+    "pick_cta": "Pick your free gift",
+    "locked_one": "Add 1 more item and pick a free gift",
+    "locked_other": "Add {{ count }} more items and pick a free gift",
+    "panel_title": "Choose your free gift",
+    "panel_intro": "You've unlocked a gift. Pick one — it's added to your order at no charge.",
+    "panel_note": "One gift per order. It stays in your cart as long as you keep two or more items.",
+    "free": "Free"
   }
 }
