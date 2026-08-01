@@ -9,7 +9,9 @@
         "heading": "Grooming days without the drama",
         "subtitle": "Quiet nail grinders, muddy-paw cleaners and walk-ready gear — made for pets who'd rather be doing anything else.",
         "button_label": "Shop bestsellers",
+        "button_link": "/collections/best-sellers",
         "button_label_2": "See how it works",
+        "button_link_2": "/collections/shop-all",
         "point_1": "Free US shipping",
         "point_2": "30-day returns",
         "point_3": "Express 2–4 days available"
@@ -351,6 +353,7 @@
         "heading": "Buy any 2 items, pick a free gift",
         "text": "Add two products to your cart and choose your gift right there — no code needed.",
         "button_label": "Shop now",
+        "button_link": "/collections/shop-all",
         "small_print": "One gift per order. The gift is added at no charge while your cart has two or more items."
       }
     }
