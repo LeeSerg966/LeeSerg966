@@ -6,6 +6,7 @@
   {%- if predictive_search.performed -%}
     {%- if predictive_search.resources.products.size > 0 -%}
       {%- for product in predictive_search.resources.products -%}
+        {%- if product.tags contains 'free-gift' -%}{%- continue -%}{%- endif -%}
         <a href="{{ product.url }}" class="search-result">
           {%- if product.featured_media -%}
             <img src="{{ product.featured_media | image_url: width: 120 }}" alt="{{ product.featured_media.alt | escape }}" width="60" height="60" loading="lazy">

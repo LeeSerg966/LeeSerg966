@@ -22,6 +22,9 @@
 
           <ul class="product-grid" style="--grid-desktop: 4">
             {%- for item in search.results -%}
+              {%- if item.object_type == 'product' and item.tags contains 'free-gift' -%}
+                {%- continue -%}
+              {%- endif -%}
               <li>
                 {%- case item.object_type -%}
                   {%- when 'product' -%}

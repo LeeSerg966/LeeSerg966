@@ -31,6 +31,11 @@
   endif
 -%}
 
+{%- if product.tags contains 'free-gift' or product.product.tags contains 'free-gift' -%}
+  {%- assign hide_price = true -%}
+{%- endif -%}
+
+{%- unless hide_price -%}
 <div class="price{% if on_sale %} price--on-sale{% endif %}{% if large %} price--large{% endif %}">
   <span class="price__regular">
     {%- if price_varies -%}
@@ -54,3 +59,4 @@
     </span>
   {%- endif -%}
 </div>
+{%- endunless -%}
