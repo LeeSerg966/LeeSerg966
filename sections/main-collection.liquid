@@ -167,9 +167,15 @@
           {%- assign card_index = 0 -%}
           {%- for product in collection.products -%}
             {%- if product.tags contains 'free-gift' -%}{%- continue -%}{%- endif -%}
-            {%- assign card_index = card_index | plus: 1 -%}
+            {%- liquid
+              assign card_index = card_index | plus: 1
+              assign lazy_card = false
+              if card_index > 4
+                assign lazy_card = true
+              endif
+            -%}
             <li>
-              {% render 'product-card', card_product: product, lazy_load: card_index > 4 %}
+              {% render 'product-card', card_product: product, lazy_load: lazy_card %}
             </li>
           {%- endfor -%}
         </ul>
