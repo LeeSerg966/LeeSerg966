@@ -66,9 +66,10 @@
     "featured": {
       "type": "featured-collection",
       "settings": {
+        "collection": "best-sellers",
         "eyebrow": "This month's favourites",
         "heading": "Bestsellers",
-        "description": "The four products our customers keep coming back for.",
+        "description": "The tools our customers keep coming back for.",
         "products_to_show": 4,
         "columns": 4,
         "show_view_all": true,
