@@ -1,0 +1,499 @@
+{
+  "sections": {
+    "rich_text_qYFUYd": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_tMAexG": {
+          "type": "heading",
+          "settings": {
+            "heading": "Why Kesvaro",
+            "heading_size": "h1"
+          }
+        },
+        "text_h7xGYM": {
+          "type": "text",
+          "settings": {
+            "text": "<p>We build the tools that make the un-fun parts of pet care quick — muddy paws, overgrown nails, wet dogs in the hallway. Every product is tested on the pets who hate sitting still, because if it doesn't work on them, it doesn't work.</p>"
+          }
+        },
+        "button_G4KWhL": {
+          "type": "button",
+          "settings": {
+            "button_label": "",
+            "button_link": "",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_tMAexG",
+        "text_h7xGYM",
+        "button_G4KWhL"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-5",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "hero": {
+      "type": "image-banner",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Muddy Paws? The Brushes Do the Work.",
+            "heading_size": "h0"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "PawPure™ Auto spins soft silicone brushes all the way around the paw — one button, ten seconds, no bathtub and no wrestling. USB-C rechargeable and fully waterproof.",
+            "text_style": "body"
+          }
+        },
+        "buttons": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "Shop PawPure™ Auto",
+            "button_link_1": "shopify://products/pawpure-auto-electric-paw-washer",
+            "button_style_secondary_1": false,
+            "button_label_2": "See how it works",
+            "button_link_2": "#how-it-works",
+            "button_style_secondary_2": true
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "text",
+        "buttons"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/nuvello-hero.png",
+        "image_overlay_opacity": 20,
+        "image_height": "large",
+        "image_behavior": "none",
+        "desktop_content_position": "middle-left",
+        "desktop_content_alignment": "left",
+        "show_text_box": true,
+        "color_scheme": "scheme-3",
+        "stack_images_on_mobile": true,
+        "mobile_content_alignment": "center",
+        "show_text_below": false
+      }
+    },
+    "trust": {
+      "type": "multicolumn",
+      "blocks": {
+        "t1": {
+          "type": "column",
+          "settings": {
+            "title": "🚚 Free Shipping",
+            "text": "<p>Free on every order — arrives in 4–10 business days.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "t2": {
+          "type": "column",
+          "settings": {
+            "title": "💚 30,000+ Happy Pets",
+            "text": "<p>Trusted by dog & cat parents across the country.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "t3": {
+          "type": "column",
+          "settings": {
+            "title": "🔁 30-Day Guarantee",
+            "text": "<p>Not happy? Get your money back — no questions asked.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "t4": {
+          "type": "column",
+          "settings": {
+            "title": "💬 Real Human Support",
+            "text": "<p>Friendly help, usually within 24 hours.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "settings": {
+        "title": "",
+        "heading_size": "h1",
+        "image_width": "third",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "",
+        "columns_desktop": 4,
+        "column_alignment": "center",
+        "background_style": "none",
+        "color_scheme": "scheme-1",
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "featured_product": {
+      "type": "featured-product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {
+            "heading_size": "h1"
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "price",
+        "variant_picker",
+        "quantity_selector",
+        "buy_buttons"
+      ],
+      "settings": {
+        "product": "pawpure-auto-electric-paw-washer",
+        "color_scheme": "scheme-4",
+        "secondary_background": false,
+        "media_size": "large",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "hide_variants": false,
+        "enable_video_looping": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "how_it_works": {
+      "type": "multicolumn",
+      "blocks": {
+        "s1": {
+          "type": "column",
+          "settings": {
+            "title": "1 · Fill & Press",
+            "text": "<p>Add a splash of water and press the button once. The brushes start turning.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "s2": {
+          "type": "column",
+          "settings": {
+            "title": "2 · Dip the Paw",
+            "text": "<p>Soft silicone brushes rotate 360° around the paw and lift mud from between the pads.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "s3": {
+          "type": "column",
+          "settings": {
+            "title": "3 · Lift & Dry",
+            "text": "<p>Ten seconds per paw. Pat dry and you're done — no towels across the hallway.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3"
+      ],
+      "settings": {
+        "title": "How It Works",
+        "heading_size": "h1",
+        "image_width": "third",
+        "image_ratio": "adapt",
+        "button_label": "Get Yours Now",
+        "button_link": "shopify://products/pawpure-auto-electric-paw-washer",
+        "columns_desktop": 3,
+        "column_alignment": "center",
+        "background_style": "primary",
+        "color_scheme": "scheme-3",
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "story": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "It does the scrubbing, so you don't have to",
+            "heading_size": "h1"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Twisting a cup by hand only cleans what it touches. PawPure™ Auto spins soft silicone brushes all the way around the paw, reaching between the pads without scratching or pulling. The brush head pops out for rinsing, the body is waterproof, and one USB-C charge lasts weeks of daily walks.</p>",
+            "text_style": "body"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_label": "Shop PawPure™ Auto",
+            "button_link": "shopify://products/pawpure-auto-electric-paw-washer",
+            "button_style_secondary": false
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "text",
+        "button"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/pawpure-auto-product.webp",
+        "height": "medium",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "",
+        "color_scheme": "scheme-1",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "testimonials": {
+      "type": "multicolumn",
+      "blocks": {
+        "r1": {
+          "type": "column",
+          "settings": {
+            "title": "⭐⭐⭐⭐⭐ — Jessica M.",
+            "text": "<p>“No more muddy prints on my kitchen floor. My golden retriever actually likes it!”</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "r2": {
+          "type": "column",
+          "settings": {
+            "title": "⭐⭐⭐⭐⭐ — Marcus T.",
+            "text": "<p>“Wish I'd bought this years ago. Takes ten seconds after every walk.”</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "r3": {
+          "type": "column",
+          "settings": {
+            "title": "⭐⭐⭐⭐⭐ — Priya K.",
+            "text": "<p>“Soft brushes, easy to rinse, and it just works. Worth every penny.”</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "r1",
+        "r2",
+        "r3"
+      ],
+      "settings": {
+        "title": "Loved by Pet Parents",
+        "heading_size": "h1",
+        "image_width": "third",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "",
+        "columns_desktop": 3,
+        "column_alignment": "center",
+        "background_style": "none",
+        "color_scheme": "scheme-4",
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "upsell": {
+      "type": "featured-collection",
+      "settings": {
+        "collection": "best-sellers",
+        "products_to_show": 3,
+        "title": "Complete the Routine",
+        "heading_size": "h1",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "columns_desktop": 3,
+        "enable_desktop_slider": false,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "faq": {
+      "type": "collapsible-content",
+      "blocks": {
+        "faq1": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "How long does shipping take?",
+            "icon": "truck",
+            "row_content": "<p>Orders are processed in 1–2 business days and typically arrive in <strong>4–10 business days</strong>. Shipping is <strong>free on every order</strong> — no minimum.</p>",
+            "page": ""
+          }
+        },
+        "faq2": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "What if my pet doesn't like it?",
+            "icon": "return",
+            "row_content": "<p>You have 30 days to return your order for any reason. Just send us a quick email and we'll make it right.</p>",
+            "page": ""
+          }
+        },
+        "faq3": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Does it work for both dogs and cats?",
+            "icon": "paw_print",
+            "row_content": "<p>Yes. The chamber fits small to medium paws and the brushes are soft enough for cats — most pets settle after the first couple of goes.</p>",
+            "page": ""
+          }
+        },
+        "faq4": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "How do I clean and charge it?",
+            "icon": "lock",
+            "row_content": "<p>The brush head pops out and rinses under the tap, and the body is waterproof so you can rinse the chamber directly. It charges over USB-C — one charge lasts weeks of daily walks.</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "faq1",
+        "faq2",
+        "faq3",
+        "faq4"
+      ],
+      "settings": {
+        "caption": "FAQ",
+        "heading": "Frequently Asked Questions",
+        "heading_size": "h1",
+        "heading_alignment": "center",
+        "layout": "row",
+        "container_color_scheme": "scheme-4",
+        "color_scheme": "scheme-1",
+        "open_first_collapsible_row": true,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Get 10% Off Your First Order",
+            "heading_size": "h1"
+          }
+        },
+        "paragraph": {
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>Care tips, new arrivals and subscriber-only offers. No spam.</p>"
+          }
+        },
+        "email_form": {
+          "type": "email_form",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "heading",
+        "paragraph",
+        "email_form"
+      ],
+      "settings": {
+        "color_scheme": "scheme-5",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "trust",
+    "featured_product",
+    "how_it_works",
+    "story",
+    "testimonials",
+    "upsell",
+    "rich_text_qYFUYd",
+    "faq",
+    "newsletter"
+  ]
+}
