@@ -1,4 +1,26 @@
 {%- paginate collection.products by section.settings.products_per_page -%}
+  {%- liquid
+    comment
+      Gift products are published so the gift chooser can read them and the
+      cart can add them, but they must never be browsable. Hide them from
+      every collection grid except the gift collection itself.
+    endcomment
+    assign hidden_gifts = 0
+    assign visible_count = 0
+    for product in collection.products
+      if product.tags contains 'free-gift'
+        assign hidden_gifts = hidden_gifts | plus: 1
+      else
+        assign visible_count = visible_count | plus: 1
+      endif
+    endfor
+
+    assign total_count = collection.products_count | minus: hidden_gifts
+    if total_count < 0
+      assign total_count = 0
+    endif
+  -%}
+
   <div class="section">
     <div class="page-width">
       <div class="collection-hero">
@@ -101,7 +123,7 @@
 
           <div style="display:flex;align-items:center;gap:2rem;margin-left:auto">
             <span class="collection-toolbar__count">
-              {{ 'products.facets.results_count' | t: count: collection.products_count }}
+              {{ 'products.facets.results_count' | t: count: total_count }}
             </span>
 
             {%- if section.settings.enable_sorting -%}
@@ -140,11 +162,14 @@
         {%- endif -%}
       {%- endif -%}
 
-      {%- if collection.products.size > 0 -%}
+      {%- if visible_count > 0 -%}
         <ul class="product-grid" style="--grid-desktop: {{ section.settings.columns }}">
+          {%- assign card_index = 0 -%}
           {%- for product in collection.products -%}
+            {%- if product.tags contains 'free-gift' -%}{%- continue -%}{%- endif -%}
+            {%- assign card_index = card_index | plus: 1 -%}
             <li>
-              {% render 'product-card', card_product: product, lazy_load: forloop.index > 4 %}
+              {% render 'product-card', card_product: product, lazy_load: card_index > 4 %}
             </li>
           {%- endfor -%}
         </ul>

@@ -24,6 +24,7 @@
     <ul class="product-grid" style="--grid-desktop: {{ section.settings.columns }}">
       {%- if section.settings.collection != blank -%}
         {%- for product in section.settings.collection.products limit: section.settings.products_to_show -%}
+          {%- if product.tags contains 'free-gift' -%}{%- continue -%}{%- endif -%}
           <li>{% render 'product-card', card_product: product %}</li>
         {%- else -%}
           <li class="text-muted">{{ 'sections.collection_template.empty' | t }}</li>
