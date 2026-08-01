@@ -314,8 +314,8 @@
         "r1": {
           "type": "column",
           "settings": {
-            "title": "⭐⭐⭐⭐⭐ — Jessica M.",
-            "text": "<p>“No more muddy prints on my kitchen floor. My golden retriever actually likes it!”</p>",
+            "title": "⭐⭐⭐⭐⭐",
+            "text": "<p>Replace with a real customer review before showing this section.</p>",
             "link_label": "",
             "link": ""
           }
@@ -323,8 +323,8 @@
         "r2": {
           "type": "column",
           "settings": {
-            "title": "⭐⭐⭐⭐⭐ — Marcus T.",
-            "text": "<p>“Wish I'd bought this years ago. Takes ten seconds after every walk.”</p>",
+            "title": "⭐⭐⭐⭐⭐",
+            "text": "<p>Replace with a real customer review before showing this section.</p>",
             "link_label": "",
             "link": ""
           }
@@ -332,8 +332,8 @@
         "r3": {
           "type": "column",
           "settings": {
-            "title": "⭐⭐⭐⭐⭐ — Priya K.",
-            "text": "<p>“Soft brushes, easy to rinse, and it just works. Worth every penny.”</p>",
+            "title": "⭐⭐⭐⭐⭐",
+            "text": "<p>Replace with a real customer review before showing this section.</p>",
             "link_label": "",
             "link": ""
           }
@@ -345,7 +345,7 @@
         "r3"
       ],
       "settings": {
-        "title": "Loved by Pet Parents",
+        "title": "What pet parents say",
         "heading_size": "h1",
         "image_width": "third",
         "image_ratio": "adapt",
@@ -359,7 +359,8 @@
         "swipe_on_mobile": true,
         "padding_top": 36,
         "padding_bottom": 36
-      }
+      },
+      "disabled": true
     },
     "upsell": {
       "type": "featured-collection",
