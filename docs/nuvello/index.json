@@ -64,7 +64,7 @@
           "type": "buttons",
           "settings": {
             "button_label_1": "Shop PawPure™ Auto",
-            "button_link_1": "shopify://products/pawpure-auto-electric-paw-washer",
+            "button_link_1": "shopify://products/pawpure-paw-cleaner",
             "button_style_secondary_1": false,
             "button_label_2": "See how it works",
             "button_link_2": "#how-it-works",
@@ -194,7 +194,7 @@
         "buy_buttons"
       ],
       "settings": {
-        "product": "pawpure-auto-electric-paw-washer",
+        "product": "pawpure-paw-cleaner",
         "color_scheme": "scheme-4",
         "secondary_background": false,
         "media_size": "large",
@@ -250,7 +250,7 @@
         "image_width": "third",
         "image_ratio": "adapt",
         "button_label": "Get Yours Now",
-        "button_link": "shopify://products/pawpure-auto-electric-paw-washer",
+        "button_link": "shopify://products/pawpure-paw-cleaner",
         "columns_desktop": 3,
         "column_alignment": "center",
         "background_style": "primary",
@@ -282,7 +282,7 @@
           "type": "button",
           "settings": {
             "button_label": "Shop PawPure™ Auto",
-            "button_link": "shopify://products/pawpure-auto-electric-paw-washer",
+            "button_link": "shopify://products/pawpure-paw-cleaner",
             "button_style_secondary": false
           }
         }
